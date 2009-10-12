@@ -105,7 +105,7 @@ Skeleton VirtualHost config:
   <VirtualHost *:80>
     ServerName www.[domain]
     ServerAlias [domain]
-    DocumentRoot [app root]/public
+    DocumentRoot [app_root]/public
 
     # Technique for adding far future expires headers taken from:
     # http://pennysmalls.com/2007/10/19/adding-an-expires-header-with-apache-for-rails/
@@ -116,7 +116,7 @@ Skeleton VirtualHost config:
     RewriteRule ^(.*)$ /with_expires_header%{REQUEST_URI} [QSA]
 
     # the with_expires_header directory is just a symlink to public
-    <Directory "[app root]/public/with_expires_header">
+    <Directory "[app_root]/public/with_expires_header">
       ExpiresActive On
       ExpiresDefault "access plus 10 years"
     </Directory>
@@ -137,5 +137,20 @@ change:
 and reload:
 
   sudo /etc/init.d/postfix reload
+
+
+== Log Rotation
+
+Add /etc/logrotate.d/[app_name]:
+
+  [app_root]/log/*.log {
+    size 20M
+    missingok
+    rotate 10
+    compress
+    delaycompress
+    notifempty
+    copytruncate
+  }
 
 
