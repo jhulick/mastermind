@@ -119,7 +119,7 @@ type
 
 If the mysqld_safe process is constantly consuming close to 100% of the CPU, try this:
 
-  sudo sed -i 's/sanity_checks;/sanity_checks/' /etc/init.d/mysql
+  sudo sed -i 's/sanity_checks;/#sanity_checks;/' /etc/init.d/mysql
   sudo /etc/init.d/mysql restart
 
 

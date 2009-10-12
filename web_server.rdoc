@@ -32,6 +32,7 @@ Disable root SSH login:
   echo 'AllowUsers [username]' >> /etc/ssh/sshd_config
   /etc/init.d/ssh reload
 
+
 == Public Key Authentication
 
 Depending on your operating system and SSH client, an extra step may be required to have your key used automatically for logins. On OS X this may have something to do with the keychain (I'm not familiar with it).
@@ -79,6 +80,7 @@ Now on your local machine:
   sudo gem install javan-whenever
   sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/whenever /usr/local/bin/whenever
 
+
 == Apache Configuration
   
 To GZip components, enable Apache's mod_deflate for CSS and JS:
@@ -121,9 +123,9 @@ Skeleton VirtualHost config:
   </VirtualHost>
 
 
-== Postfix
+== Postfix Configuration
 
-Edit /etc/postfix/main.cf. Add:
+Edit <tt>/etc/postfix/main.cf</tt> and add:
 
   smtpd_reject_unlisted_recipient = no
 

@@ -1,6 +1,6 @@
 = OS X (Leopard)
 
-Prevent writing .DS_Store files on network drives:
+Prevent writing of <tt>.DS_Store</tt> files on network drives:
 
   defaults write com.apple.desktopservices DSDontWriteNetworkStores true
 
@@ -8,7 +8,7 @@ Prevent TextMate from creating extra file on network drives for storing extended
 
   defaults write com.macromates.textmate OakDocumentDisableFSMetaData 1
 
-Lexmark printer drivers
+Lexmark printer drivers:
 
   # Leopard DVD: "Optional Installs" section of setup program
 
