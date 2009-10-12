@@ -1,0 +1,139 @@
+= Web Server (Ubuntu Hardy)
+
+== First Steps
+
+Change root password (logged in as root):
+
+  passwd
+
+Set locale:
+
+  locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8
+
+Update system:
+
+  apt-get update && apt-get dist-upgrade -y
+
+Set time zone:
+
+  cp /etc/localtime /etc/localtime.bak
+  ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+
+Create a developer user account and give sudo privileges.
+
+  adduser [username] # then answer various prompts
+  echo '[username] ALL=(ALL) ALL' >> /etc/sudoers
+
+Disable root SSH login:
+
+  sed -i 's/PermitRootLogin yes/PermitRootLogin no/g' /etc/ssh/sshd_config
+  sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+  echo 'UseDNS no' >> /etc/ssh/sshd_config
+  echo 'AllowUsers [username]' >> /etc/ssh/sshd_config
+  /etc/init.d/ssh reload
+
+== Public Key Authentication
+
+Depending on your operating system and SSH client, an extra step may be required to have your key used automatically for logins. On OS X this may have something to do with the keychain (I'm not familiar with it).
+
+On the server:
+
+  mkdir ~/.ssh
+
+Now on your local machine:
+
+  # generate a key:
+  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+  
+  # tell the server about it:
+  ssh [user]@[server] 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
+    <enter password>
+
+
+== Basic Software
+
+  sudo apt-get -y install mysql-server postfix imagemagick logrotate \
+    build-essential curl git-core apache2-mpm-worker apache2-threaded-dev
+
+  # Configure MySQL to use UTF-8.
+  sudo echo 'character-set-server=utf8' >> /etc/mysql/my.cnf
+  sudo echo 'default-collation=utf8_unicode_ci' >> /etc/mysql/my.cnf
+  sudo /etc/init.d/mysql restart
+
+
+== Ruby (Enterprise Edition), Gems and Passenger
+
+  sudo apt-get -y install zlib1g-dev libssl-dev libreadline5-dev libmysql-ruby1.8 libmysqlclient15-dev
+  cd /usr/local/src
+  sudo wget http://rubyforge.org/frs/download.php/64475/ruby-enterprise-1.8.7-20090928.tar.gz
+  sudo tar xzvf ruby-enterprise-1.8.7-20090928.tar.gz
+  sudo ruby-enterprise-1.8.7-20090928/installer
+
+  cd /usr/local/bin
+  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/ruby
+  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/gem
+  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/irb
+  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/rake
+  sudo /opt/ruby-enterprise-1.8.7-20090928/bin/passenger-install-apache2-module
+
+  sudo gem install javan-whenever
+  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/whenever /usr/local/bin/whenever
+
+== Apache Configuration
+  
+To GZip components, enable Apache's mod_deflate for CSS and JS:
+
+  cd /etc/apache2/mods-enabled
+  sudo ln -s ../mods-available/deflate.load
+  sudo ln -s ../mods-available/deflate.conf
+
+In mods-available/deflate.conf, add text/css and application/x-javascript:
+
+  cd /etc/apache2/mods-available
+  sudo sed -i 's/text\/xml/text\/xml text\/css application\/x-javascript application\/javascript/g' deflate.conf
+  
+To add a far future 'Expires' header:
+
+  cd /etc/apache2/mods-enabled
+  sudo ln -s ../mods-available/rewrite.load
+  sudo ln -s ../mods-available/expires.load
+  
+Skeleton VirtualHost config:
+
+  <VirtualHost *:80>
+    ServerName www.[domain]
+    ServerAlias [domain]
+    DocumentRoot [app root]/public
+
+    # Technique for adding far future expires headers taken from:
+    # http://pennysmalls.com/2007/10/19/adding-an-expires-header-with-apache-for-rails/
+    RewriteEngine On
+
+    # add something we can do a directory match on
+    RewriteCond %{QUERY_STRING} ^[0-9]{10}$
+    RewriteRule ^(.*)$ /with_expires_header%{REQUEST_URI} [QSA]
+
+    # the with_expires_header directory is just a symlink to public
+    <Directory "[app root]/public/with_expires_header">
+      ExpiresActive On
+      ExpiresDefault "access plus 10 years"
+    </Directory>
+  </VirtualHost>
+
+
+== Postfix
+
+Edit /etc/postfix/main.cf. Add:
+
+  smtpd_reject_unlisted_recipient = no
+
+change:
+
+  mydestination = localhost.localdomain, localhost
+  # (get rid of 'yourdomain.com' or whatever)
+
+and reload:
+
+  sudo /etc/init.d/postfix reload
+
+

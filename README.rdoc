@@ -1,0 +1,4 @@
+= Mastermind
+
+This is a place for me to document my software setups (and solutions to common problems) for quick replication. Most of these files assume the use of Ubuntu Linux, which is my server and desktop environment.
+

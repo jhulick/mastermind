@@ -1,0 +1,98 @@
+= Subversion (SVN)
+
+== Create new repository on SVN server
+
+  cd [svn root]
+  svnadmin create [new_repo]
+  chown -R svn:svn new_repo
+  chmod -R g+rw new_repo
+
+
+== Load unversioned project into repository
+
+1. Create a new repository on your SVN server.
+
+2. Locally, rename your current (non-working) code's root to 'trunk'.
+
+  mv project trunk
+
+3. Check out the (empty) repo to the desired project directory.
+
+  svn checkout svn://... project
+
+4. Move your code ('trunk') into the newly checked-out working copy.
+
+  mv trunk project/
+
+5. Create tags and branches.
+
+  mkdir project/tags
+  mkdir project/branches
+
+6. Add all files, then revert ones you don't want to add.
+
+  svn add --force *
+  svn revert ...
+
+7. Commit initial repository.
+
+  svn ci -m "Initial check-in."
+
+
+== Dump/Load
+
+Dump a repository (retain all versioning info):
+
+  svnadmin dump [path_to_repo] > [dump_file]
+
+Restore a dumped repository:
+
+  svnadmin create [path_to_new_repo]
+  svnadmin load [path_to_new_repo] < [dump_file]
+
+
+== Roll back changes (reverse merge)
+
+To undo revisions 74 and 75:
+
+  svn merge -r 75:73 svn://...
+
+
+== Set up a repository for an existing (non-versioned) Rails application
+
+First, create a new repository on your SVN server/host. Then:
+
+  # Change directory to your current code's root.
+  cd ..
+
+  # Add trunk to your new repository.
+  svn mkdir svn://.../trunk
+
+  # Check out the (empty) trunk to your current directory.
+  svn checkout svn://.../trunk .
+
+  # Add all files (may need "--force").
+  svn add --force *
+
+  # Remove some files.
+  svn revert config/database.yml
+  svn revert db/schema.rb
+  svn revert log/*
+  svn revert public/index.html
+  svn revert public/images/rails.png
+
+  # Set some svn:ignores.
+  svn propset svn:ignore "database.yml" config
+  svn propset svn:ignore "schema.rb" db
+  svn propset svn:ignore "*.log" log
+  svn propset svn:ignore "*" doc
+  svn propset svn:ignore "*" tmp/cache
+  svn propset svn:ignore "*" tmp/pids
+  svn propset svn:ignore "*" tmp/sessions
+  svn propset svn:ignore "*" tmp/sockets
+  svn propset svn:executable "*" `find script -type f | grep -v '.svn'` public/dispatch.*
+
+  # Commit.
+  svn commit -m "Initial check-in."
+
+

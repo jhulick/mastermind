@@ -1,0 +1,25 @@
+= Ruby on Rails
+
+=== Missing Net or TimeoutError
+
+If you find yourself having to manually require Net or TimeoutError, make sure you're not skipping ActiveResource in config/environment.rb.
+
+
+
+=== script/runner
+
+To specify environment for script/runner:
+
+  RAILS_ENV=test script/runner blah_blah_blah
+
+
+
+=== HTTP Status Codes
+
+To see HTTP status code names:
+
+  /usr/lib/ruby/gems/1.8/gems/actionpack-2.3.2/lib/action_controller/status_codes.rb
+
+When specifying a status (eg, in head or render method) you can give the number or a symbolized version of the message (lowercased, spaces replaced with underscores).
+
+

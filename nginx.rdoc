@@ -1,0 +1,32 @@
+= Nginx
+
+Install:
+
+  sudo apt-get install nginx
+
+Test configuration:
+
+  sudo nginx -t
+
+Test specific configuration file:
+
+  sudo nginx -t -c [path_to_file]
+
+Prevent sending server version in response headers:
+
+  server_tokens off;
+  # but this directive was added in 0.5.34 / 0.6.15
+
+Suppress 'nginx' name entirely in response headers:
+
+  # can't be done (see http://www.ruby-forum.com/topic/145494)
+
+
+Start:
+
+  sudo nginx
+
+Stop:
+
+  sudo killall nginx
+

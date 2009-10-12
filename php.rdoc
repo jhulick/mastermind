@@ -1,0 +1,11 @@
+= PHP
+
+== Troubleshooting
+
+Blank page with no error message usually indicates problem including a file (make sure all dependencies--eg, PEAR packages--are installed) or a syntax error in an included file.
+
+PEAR QuickForm package: if it crashes, resulting in a "Page contains no data" and you're using $renderer->setElementTemplate(...), try reducing the length of the template. It seems to have problems with lengths over about 400 characters.
+
+Message "Fatal error: Cannot instantiate non-existent class: ...": look for syntax errors (especially missing semicolons) in required files.
+
+

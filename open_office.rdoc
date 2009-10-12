@@ -1,0 +1,15 @@
+= OpenOffice
+
+To extract images from a Word Document:
+
+# Open the document.
+# Go to File > Save as option and click it
+# Select odf as the new format.
+# Navigate to where you saved your new odf document.
+# Change your document's extension by renaming it from .odf to .zip
+# Extract the new .zip archive
+# You will find a Pictures folder that contains the images.
+
+Taken from http://osrevolution.com/os-tutorial/how-extract-images-word-document-using-openoffice
+
+

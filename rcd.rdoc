@@ -1,0 +1,12 @@
+= rc.d (UNIX Startup Scripts)
+
+Install a ("System-V style") init script:
+
+  # "defaults" = start at runlevels 2/3/4/5, stop at 0/1/6
+  sudo update-rc.d [script_name] defaults
+
+Remove an init script:
+
+  sudo update-rc.d [script_name] remove
+
+

@@ -1,0 +1,125 @@
+= MySQL
+
+== Setup
+
+=== Change Password
+
+For root user (from shell):
+
+  mysqladmin -u root -p password [new_password]
+
+For other user (from mysql> prompt):
+
+  SET PASSWORD FOR '[username]'@'localhost' = PASSWORD('[new_password]');
+
+
+=== Launch UTF-8 Client
+
+  mysql -u[username] -p --default-character-set=utf8
+
+
+=== Authentication Problems
+
+On error message: "Client does not support authentication protocol requested by server; consider upgrading MySQL client", downgrade MySQL's passwords to the "old" shorter encryption:
+
+    SET PASSWORD FOR '[username]'@'[hostname]' = OLD_PASSWORD('[password]');
+
+
+=== Character Set/Collation
+
+Good reference: http://www.informit.com/articles/article.aspx?p=328641&seqNum=3
+
+  ALTER DATABASE [db_name] DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_unicode_ci;
+  ALTER TABLE [table_name] DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+
+=== Important UTF-8 Defaults (in my.cnf)
+
+  character-set-server=utf8
+  default-collation=utf8_unicode_ci
+
+
+=== Recovering From Big Mistake
+
+If you do something bad (eg, accidentally delete the 'mysql' table), have to re-install the server, and a plain apt-get remove/install won't work, do this:
+
+  sudo apt-get --purge remove mysql-server-5.0
+  sudo apt-get --reinstall install mysql-server-5.0
+
+
+== Optimization
+
+=== Memory Use
+
+The amount of memory consumed by the MySQL server is approximately (in KB):
+
+  key_buffer_size + (read_buffer_size + sort_buffer_size) * max_connections
+
+
+=== Query Cache
+
+Is query cache enabled?
+
+  SHOW VARIABLES LIKE 'have_query_cache';
+
+Query cache details:
+
+  SHOW VARIABLES LIKE 'query%';
+
+Query cache performance:
+
+  SHOW STATUS LIKE 'Qcache%';
+
+
+=== Table Types
+
+List InnoDB tables (MySQL 5.0+):
+
+  SELECT `TABLE_SCHEMA`,`TABLE_NAME` FROM INFORMATION_SCHEMA.TABLES WHERE ENGINE = 'InnoDB';
+
+Change a table's engine to MyISAM:
+
+  ALTER TABLE `table_name` ENGINE=MyISAM;
+
+
+=== EXPLAIN Results
+
+select_type
+
+  SIMPLE                Simple SELECT (not using UNION or subqueries)
+  PRIMARY               Outermost SELECT
+  UNION                 Second or later SELECT statement in a UNION
+  DEPENDENT UNION       Second or later SELECT statement in a UNION, dependent on outer query
+  UNION RESULT          Result of a UNION.
+  SUBQUERY              First SELECT in subquery
+  DEPENDENT SUBQUERY    First SELECT in subquery, dependent on outer query
+  DERIVED               Derived table SELECT (subquery in FROM clause)
+  UNCACHEABLE SUBQUERY  A subquery for which the result cannot be cached and must
+                        be re-evaluated for each row of the outer query
+                        
+type
+
+  system
+  const
+  eq_ref
+  ref
+  fulltext
+  ref_or_null
+  index_merge
+  unique_subquery
+  index_subquery
+  range
+  index
+  ALL
+
+
+=== mysqld_safe 100% CPU Problem
+
+<i>from: http://forum.slicehost.com/comments.php?DiscussionID=1000&page=2</i>
+
+If the mysqld_safe process is constantly consuming close to 100% of the CPU, try this:
+
+  sudo sed -i 's/sanity_checks;/sanity_checks/' /etc/init.d/mysql
+  sudo /etc/init.d/mysql restart
+
+

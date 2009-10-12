@@ -1,0 +1,33 @@
+= OS X (Leopard)
+
+Prevent writing .DS_Store files on network drives:
+
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+
+Prevent TextMate from creating extra file on network drives for storing extended attributes:
+
+  defaults write com.macromates.textmate OakDocumentDisableFSMetaData 1
+
+Lexmark printer drivers
+
+  # Leopard DVD: "Optional Installs" section of setup program
+
+Ruby headers and other useful programming stuff:
+
+  # Leopard DVD (2nd disk): install XCode Tools
+
+Installing MySQL:
+
+  # install 32-bit version from MySQL.com
+  sudo cp /usr/local/mysql/support-files/my-small.cnf /etc/my.cnf
+  sudo echo 'character-set-server=utf8' >> /etc/my.cnf
+  sudo echo 'default-collation=utf8_unicode_ci' >> /etc/my.cnf
+
+Installing mysql gem:
+
+  sudo env ARCHFLAGS="-arch i386" gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+
+Start CouchDB:
+
+  sudo launchctl load -w /opt/local/Library/LaunchDaemons/org.apache.couchdb.plist
+

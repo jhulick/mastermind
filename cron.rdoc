@@ -1,0 +1,47 @@
+= Cron
+
+== Troubleshooting
+
+<i>from http://ubuntuforums.org/archive/index.php/t-518675.html:</i>
+
+There could be many reasons why a script works fine from the command line and not as a cron.
+Most of the times the problems are due to the environment variables. Cron jobs run with a very limited environment.
+
+To troubleshoot your script from the command line do the following. Create a dumb cron that prints the environment:
+
+  * * * * * env | sort > /tmp/cron-env.txt
+
+Wait for the cron to run and disable it. Now the file /tmp/cron-env.txt should have the environment variables that are used by a cronjob. Start a new shell and delete all your environment variables, keep in mind that this will be very nasty for that shell, if something doesn't work close that shell and start a new one.
+
+  for var in `env | perl -lne '($v) = split /=/; print $v'` ; do unset $var ; done
+
+Check that all environment variables are deleted by calling:
+
+  /usr/bin/env
+
+You should have one line of input
+
+  _=/usr/bin/env
+
+Now load the environment used by the cron system:
+
+
+  perl -lne '($n,$v) = split /=/, $_, 2; print qq{export $n="$v"}' /tmp/cron-env.txt > /tmp/cron-env.sh
+  source /tmp/cron-env.sh
+
+
+That's it you should now have in your shell the same environment as in the crons. Try to execute your script and check if it works. If it doesn't make the right changes until it accomplish its task properly and try it as a real cronjob.
+
+To repeat this commands for a future usage you can create a script named set-cron-env.sh that will include the following lines:
+
+  # Delete the current environment
+  for var in `env | perl -lne '($v) = split /=/; print $v'` ; do
+  unset $var ;
+  done
+
+  # Load the environment of the crons
+  echo "REPLACE THIS LINE by the contents of /tmp/cron-env.sh"
+
+Load that script through the command 'source':
+source set-cron-env.sh
+

@@ -1,0 +1,19 @@
+= vi
+
+Search and replace on lines 8-10:
+
+  :8,10 s/[search]/[replace]/g
+
+Search and replace on all lines:
+
+  :% s/[search]/[replace]/g
+
+To set as default editor:
+
+  # add to your ~/.bashrc:
+  export EDITOR=vim
+
+  # apply immediately:
+  source ~/.bashrc
+
+

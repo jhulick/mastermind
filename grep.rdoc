@@ -1,0 +1,12 @@
+= grep
+
+Most of the time you want egrep (same as grep -E) which uses extended regular expressions. 
+
+Recursively search a directory tree for matches to a regular expression.
+
+  grep -r '[regex]' [path]
+
+Filter output of a command (eg, 'ps aux') for lines that match a regular expression.
+
+  ps aux | grep '[regex]'
+

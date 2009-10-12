@@ -1,0 +1,52 @@
+= quota
+
+Install quota package:
+
+  sudo apt-get install quota
+
+
+Add quota info to /etc/fstab:
+
+  # append 'usrquota' and/or 'grpquota' to comma-delimited options, eg:
+  /dev/hda1 /         ext3 defaults,errors=remount-o,usrquota 0 1
+  /dev/hdb4 /mnt/disk ext3 defaults,usrquota,grpquota 0 0
+
+
+Re-mount any modified filesystems, eg:
+
+  sudo mount -o remount /
+  sudo mount -o remount /mnt/disk
+
+
+Make sure something happened:
+
+  mount | grep quota
+
+
+Check for problems (scan may take a few moments):
+
+  sudo quotacheck -augmv
+
+
+The first time you run quotacheck -augmv, you will see a bunch of warnings about files not existing (eg, "Cannot stat old user quota file"). This is because the system has not been checked before. After it is checked, the quota version 2 files /mnt/disk/aquota.user and /mnt/disk/ aquota.group (or quota.user and quota.group if you are using the older quota version 1 system) will be created and these errors should not appear again.
+
+
+Turn on quotas:
+
+  sudo quotaon -augv
+
+
+Edit quota for a user:
+
+  sudo edquota -u [username]
+
+
+Edit grace periods:
+
+  sudo edquota -t
+
+
+View quota report:
+
+  sudo repquota -a
+
