@@ -1,0 +1,14 @@
+= Postfix
+
+== Troubleshooting
+
+If you have TLS-related problems, increase log level:
+
+  sudo postconf -e 'smtpd_tls_loglevel = 4'
+  sudo /etc/init.d/postfix reload
+
+You might want to try re-generating the certificate or, to disable TLS altogether:
+
+  sudo postconf -e smtpd_use_tls=no
+  sudo /etc/init.d/postfix reload
+
