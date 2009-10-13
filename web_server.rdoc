@@ -50,6 +50,8 @@ Now on your local machine:
   ssh [user]@[server] 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
     <enter password>
 
+You may also need to load a private key for authenticating to your code repositories.
+
 
 == Basic Software
 
