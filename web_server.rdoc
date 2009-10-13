@@ -156,6 +156,16 @@ and reload:
   sudo /etc/init.d/postfix reload
 
 
+== Cron
+
+Configure email address to receive notifications:
+
+  crontab -e
+  
+  # add at top:
+  MAILTO=alex@alexreisner.com
+
+
 == Log Rotation
 
 Add /etc/logrotate.d/[app_name]:
