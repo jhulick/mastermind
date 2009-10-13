@@ -82,11 +82,15 @@ Install:
 
   sudo /opt/ruby-enterprise-1.8.7-20090928/bin/passenger-install-apache2-module -a
 
-Edit <tt>/etc/apache2/mods-enabled/passenger.load</tt> and add:
+Configure:
 
+  sudo vi /etc/apache2/mods-enabled/passenger.load
+  
+  # add lines:
   LoadModule passenger_module /opt/ruby-enterprise-1.8.7-20090928/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
   PassengerRoot /opt/ruby-enterprise-1.8.7-20090928/lib/ruby/gems/1.8/gems/passenger-2.2.5
   PassengerRuby /opt/ruby-enterprise-1.8.7-20090928/bin/ruby
+  # save and exit
 
 Create symlink and restart Apache:
 
@@ -146,7 +150,42 @@ X-Sendfile module:
   cd /etc/apache2/mods-enabled
   sudo ln -s ../mods-available/xsendfile.load
 
-Skeleton VirtualHost config:
+Allow VirtualHosts only on port 80:
+
+  sudo sed -i 's/NameVirtualHost \*/NameVirtualHost *:80/' /etc/apache2/sites-available/default
+  sudo sed -i 's/<VirtualHost \*>/<VirtualHost *:80>/' /etc/apache2/sites-available/default
+
+Restart:
+
+  sudo apache2ctl graceful
+
+
+== Postfix Configuration
+
+Edit config (<tt>/etc/postfix/main.cf</tt>):
+
+  sudo postconf -e 'smtpd_reject_unlisted_recipient = no'
+  sudo postconf -e 'mydestination = localhost.localdomain, localhost'
+  sudo postconf -e 'smtpd_use_tls = no'
+
+and reload:
+
+  sudo /etc/init.d/postfix reload
+
+
+== Cron
+
+Configure email address to receive notifications:
+
+  crontab -e
+  
+  # add at top:
+  MAILTO=alex@alexreisner.com
+
+
+== Web Sites
+
+=== Apache VirtualHost
 
   <VirtualHost *:80>
     ServerName www.[domain]
@@ -173,30 +212,7 @@ Skeleton VirtualHost config:
   </VirtualHost>
 
 
-== Postfix Configuration
-
-Edit config (<tt>/etc/postfix/main.cf</tt>):
-
-  sudo postconf -e 'smtpd_reject_unlisted_recipient = no'
-  sudo postconf -e 'mydestination = localhost.localdomain, localhost'
-  sudo postconf -e 'smtpd_use_tls = no'
-
-and reload:
-
-  sudo /etc/init.d/postfix reload
-
-
-== Cron
-
-Configure email address to receive notifications:
-
-  crontab -e
-  
-  # add at top:
-  MAILTO=alex@alexreisner.com
-
-
-== Log Rotation
+=== Log Rotation
 
 Add /etc/logrotate.d/[app_name]:
 
