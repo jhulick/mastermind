@@ -43,8 +43,8 @@ On the server:
 
 Now on your local machine:
 
-  # generate a key:
-  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+  # generate an RSA key:
+  ssh-keygen -t rsa -f ~/.ssh/id_rsa
   
   # tell the server about it:
   ssh [user]@[server] 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
