@@ -142,14 +142,10 @@ Skeleton VirtualHost config:
 
 == Postfix Configuration
 
-Edit <tt>/etc/postfix/main.cf</tt> and add:
+Edit config (<tt>/etc/postfix/main.cf</tt>):
 
-  smtpd_reject_unlisted_recipient = no
-
-change:
-
-  mydestination = localhost.localdomain, localhost
-  # (get rid of 'yourdomain.com' or whatever)
+  sudo postconf -e 'smtpd_reject_unlisted_recipient = no'
+  sudo postconf -e 'mydestination = localhost.localdomain, localhost'
 
 and reload:
 
