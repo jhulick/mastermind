@@ -146,6 +146,7 @@ Edit config (<tt>/etc/postfix/main.cf</tt>):
 
   sudo postconf -e 'smtpd_reject_unlisted_recipient = no'
   sudo postconf -e 'mydestination = localhost.localdomain, localhost'
+  sudo postconf -e 'smtpd_use_tls = no'
 
 and reload:
 
