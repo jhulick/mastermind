@@ -55,16 +55,13 @@ You may also need to load a private key for authenticating to your code reposito
 
 == Basic Software
 
+Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick, etc:
+
   sudo apt-get -y install mysql-server postfix imagemagick logrotate \
     build-essential curl git-core apache2-mpm-worker apache2-threaded-dev
 
-  # Configure MySQL to use UTF-8.
-  sudo echo 'character-set-server=utf8' >> /etc/mysql/my.cnf
-  sudo echo 'default-collation=utf8_unicode_ci' >> /etc/mysql/my.cnf
-  sudo /etc/init.d/mysql restart
 
-
-== Ruby (Enterprise Edition), Gems and Passenger
+== Ruby (Enterprise Edition)
 
   sudo apt-get -y install zlib1g-dev libssl-dev libreadline5-dev libmysql-ruby1.8 libmysqlclient15-dev
   cd /usr/local/src
@@ -77,11 +74,45 @@ You may also need to load a private key for authenticating to your code reposito
   sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/gem
   sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/irb
   sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/rake
-  sudo /opt/ruby-enterprise-1.8.7-20090928/bin/passenger-install-apache2-module
 
-  sudo gem install ruby-debug
-  sudo gem install javan-whenever
+
+== Passenger
+
+Install:
+
+  sudo /opt/ruby-enterprise-1.8.7-20090928/bin/passenger-install-apache2-module -a
+
+Edit <tt>/etc/apache2/mods-enabled/passenger.load</tt> and add:
+
+  LoadModule passenger_module /opt/ruby-enterprise-1.8.7-20090928/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
+  PassengerRoot /opt/ruby-enterprise-1.8.7-20090928/lib/ruby/gems/1.8/gems/passenger-2.2.5
+  PassengerRuby /opt/ruby-enterprise-1.8.7-20090928/bin/ruby
+
+Create symlink and restart Apache:
+
+  sudo ln -s /etc/apache2/mods-available/passenger.load /etc/apache2/mods-enabled/passenger.load
+  sudo apache2ctl graceful
+  
+  
+== Gems
+
+  sudo gem source -a http://gems.github.com
+  sudo gem install ruby-debug pony chronic javan-whenever
   sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/whenever /usr/local/bin/whenever
+
+
+== MySQL Configuration
+
+Use UTF-8:
+
+  sudo vi /etc/mysql/my.cnf
+  
+  # add lines:
+  character-set-server=utf8
+  default-collation=utf8_unicode_ci
+  # save and exit
+  
+  sudo /etc/init.d/mysql restart
 
 
 == Apache Configuration
