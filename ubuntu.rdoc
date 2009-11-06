@@ -42,8 +42,10 @@ Finish...
 
 === Basic
 
-  sudo apt-get install ubuntu-restricted-extras rar ntp xchm compizconfig-settings-manager inkscape transmission hamster-applet
-  # install Skype from .deb package
+  sudo apt-get install ubuntu-restricted-extras rar ntp xchm \
+    compizconfig-settings-manager inkscape transmission hamster-applet
+
+Then install Skype from .deb package.
 
 === JungleDisk
 
@@ -55,9 +57,8 @@ Finish...
 
 === Development Basics
 
-  sudo apt-get install build-essential vim-full vim-ruby gedit-plugins meld rpl curl subversion git-core imagemagick
-
-=== Git configuration
+  sudo apt-get install build-essential vim-full vim-ruby \
+    gedit-plugins meld rpl curl subversion git-core imagemagick
 
   git config --global user.email alex@alexreisner.com
   git config --global user.name alexreisner
@@ -67,7 +68,7 @@ Finish...
 
 === W3C Markup Validator
 
-This is accessed at: http://localhost/w3c-markup-validator/
+This is accessed at http://localhost/w3c-markup-validator
 
   sudo apt-get install w3c-markup-validator
   sudo mkdir /usr/local/validator
@@ -109,12 +110,14 @@ This is accessed at: http://localhost/w3c-markup-validator/
 === Ruby
 
   sudo apt-get install ruby1.8 ri ruby1.8-dev rdoc irb libmysql-ruby libopenssl-ruby
-  #sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
-  #sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
-  #sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
-  #sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb
+  
+  # only if binaries not found in path:
+  sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
+  sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
+  sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
+  sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb
 
-=== Gems/Rails/etc
+=== Gems, Rails, etc
 
   cd /usr/local/src
   sudo wget http://rubyforge.org/frs/download.php/56227/rubygems-1.3.3.tgz
@@ -134,7 +137,7 @@ This is accessed at: http://localhost/w3c-markup-validator/
 
   sudo apt-get install php5 php5-gd php5-mysql
 
-=== PostgreSQL/PostGIS
+=== PostgreSQL, PostGIS
 
   sudo apt-get install postgresql-8.3-postgis 
 
@@ -152,6 +155,7 @@ This is accessed at: http://localhost/w3c-markup-validator/
 == Add Configuration Editor to Menu
 
 Go to System > Preferences > Main Menu, and select System Tools from the left menu. Put a checkmark next to Configuration Editor.
+
 
 == Restore Data & Settings
 
