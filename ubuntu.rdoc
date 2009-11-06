@@ -1,0 +1,222 @@
+= Ubuntu/Gnome (Januty)
+
+== Update System
+
+  sudo apt-get update
+  sudo apt-get dist-upgrade
+
+
+== Set up Network
+
+  # NFS
+  sudo apt-get install portmap nfs-common
+
+  # add to /etc/fstab:
+  192.168.0.100:/media    /mnt/media      nfs rw,hard,intr 0 0
+  192.168.0.100:/private  /mnt/private    nfs rw,hard,intr 0 0
+
+  # and run:
+  sudo mkdir /mnt/media
+  sudo mkdir /mnt/private
+  sudo mount -a
+
+  # SMB
+  sudo apt-get install samba smbfs
+  sudo smbpasswd -a alex
+
+
+== Printer
+
+In Firefox go to: http://localhost:631 and click 'add printer'.
+
+* Use HTTP (Internet Printing Protocol)
+* URI is: http://192.168.0.100:631/printers/Lexmark_T430
+* Provide PPD from: private/software/drivers/Lexmark/...
+* If prompted for password use Ubuntu account name/pw.
+* Change Media Source to 'Tray 1' ('Auto' selects manual feeder)
+
+Finish...
+
+
+== Software
+
+=== Basic
+
+  sudo apt-get install ubuntu-restricted-extras rar ntp xchm compizconfig-settings-manager inkscape transmission hamster-applet
+  # install Skype from .deb package
+
+=== JungleDisk
+
+  # fuse
+  sudo apt-get install fuse-utils
+  # davfs
+  sudo apt-get install davfs2
+  [sudo mount -t davfs http://localhost:2667 /mnt/jungledisk -o nolocks]
+
+=== Development Basics
+
+  sudo apt-get install build-essential vim-full vim-ruby gedit-plugins meld rpl curl subversion git-core imagemagick
+
+=== Git configuration
+
+  git config --global user.email alex@alexreisner.com
+  git config --global user.name alexreisner
+  git config --global color.diff auto
+  git config --global color.status auto
+  git config --global color.branch auto
+
+=== W3C Markup Validator
+
+This is accessed at: http://localhost/w3c-markup-validator/
+
+  sudo apt-get install w3c-markup-validator
+  sudo mkdir /usr/local/validator
+  sudo ln -s /usr/share/w3c-markup-validator/templates /usr/local/validator/templates
+
+=== Apache
+
+  sudo apt-get install apache2-mpm-worker apache2-threaded-dev 
+
+=== Apache mod_xsendfile
+
+  cd /usr/local/src
+  sudo wget http://tn123.ath.cx/mod_xsendfile/mod_xsendfile-0.9.tar.gz
+  sudo tar -xf mod_xsendfile-0.9.tar.gz
+  cd mod_xsendfile-0.9
+  sudo apxs2 -cia mod_xsendfile.c
+
+  # create /etc/apache2/mods-available/xsendfile.load
+  LoadModule xsendfile_module /usr/lib/apache2/modules/mod_xsendfile.so
+
+  # enable xsendfile.load
+  cd /etc/apache2/mods-enabled
+  sudo ln -s ../mods-available/xsendfile.load xsendfile.load
+  sudo apache2ctl restart
+
+=== MySQL
+
+  sudo apt-get install mysql-server mysql-admin mysql-query-browser
+
+  # add to [mysqld] section of /etc/mysql/my.cnf:
+  character-set-server = utf8
+  collation-server = utf8_unicode_ci
+  default-collation = utf8_unicode_ci
+  default-character-set = utf8
+
+  # restart:
+  sudo /etc/init.d/mysql restart
+
+=== Ruby
+
+  sudo apt-get install ruby1.8 ri ruby1.8-dev rdoc irb libmysql-ruby libopenssl-ruby
+  #sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
+  #sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
+  #sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
+  #sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb
+
+=== Gems/Rails/etc
+
+  cd /usr/local/src
+  sudo wget http://rubyforge.org/frs/download.php/56227/rubygems-1.3.3.tgz
+  sudo tar -xf rubygems-1.3.3.tgz
+  cd rubygems-1.3.3
+  sudo ruby setup.rb
+  sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
+  sudo gem update --system
+  sudo gem install ruby-debug rails
+
+=== Passenger
+
+  sudo gem install passenger
+  sudo passenger-install-apache2-module
+
+=== PHP
+
+  sudo apt-get install php5 php5-gd php5-mysql
+
+=== PostgreSQL/PostGIS
+
+  sudo apt-get install postgresql-8.3-postgis 
+
+=== SQLite
+
+  sudo apt-get install sqlite3
+
+=== Ruby SQLite Support
+
+  sudo apt-get build-dep libsqlite3-ruby1.8
+  sudo gem install sqlite3-ruby
+
+
+
+== Add Configuration Editor to Menu
+
+Go to System > Preferences > Main Menu, and select System Tools from the left menu. Put a checkmark next to Configuration Editor.
+
+== Restore Data & Settings
+
+=== Databases
+
+Databases should be dumped to /var/backups/mysql.sql.gz
+
+=== Crontab
+
+  sudo crontab -e
+  
+  # m h  dom mon dow   command
+  0 0 * * 3 /usr/local/sbin/mysql_dump_all
+
+=== Files
+
+  ~/
+    .bashrc
+    .gitconfig
+    .gtk-bookmarks
+    .jungledisk
+    .mozilla
+    .ssh
+    .subversion
+    .vimrc
+    
+  ~/.gconf/apps/
+    gedit-2
+    gnome-terminal
+    
+  ~/.gnome2/
+    gedit
+    gtksourceview-1.0
+    panel2.d              # then drag onto panel
+
+  ~/.local/share/
+    rhythmbox
+
+
+== Old Stuff
+
+  # Python
+  sudo apt-get install python-mysqldb
+  wget http://peak.telecommunity.com/dist/ez_setup.py
+  sudo python ez_setup.py
+  rm ez_setup.py
+
+  # Pylons + SPNwww
+  sudo apt-get install python-zodb
+  sudo easy_install Pylons
+  sudo easy_install twForms
+  sudo easy_install twTinyMCE
+  # install path module (http://www.jorendorff.com/articles/python/path/)
+
+  # OpenOffice/ODBC
+  sudo apt-get install unixodbc libmyodbc unixodbc-bin
+  # Configure ODBC connections (from http://www.linux.com/feature/60185):
+  sudo ODBCConfig
+  # Click the System DSN tab and click the Add button.
+  # Click Add again to create a new ODBC driver.
+  # Name: MySQL ODBC Driver
+  # Driver: /usr/lib/odbc/libmyodbc.so
+  # Setup: /usr/lib/odbc/libodbcmyS.so
+  # Click the Save and Exit button (check) to save the settings.
+  # Click OK to open the Data Source Properties window.
+  # Specify name, server address, db name, etc.
+
+
