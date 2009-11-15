@@ -126,7 +126,7 @@ This is accessed at http://localhost/w3c-markup-validator
   cd rubygems-1.3.5
   sudo ruby setup.rb
   sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
-  sudo gem install ruby-debug rails
+  sudo gem install ruby-debug rails mongrel
 
 === Passenger
 
@@ -178,13 +178,25 @@ Databases should be dumped to /var/backups/mysql.sql.gz
   # m h  dom mon dow   command
   0 0 * * 3 /usr/local/sbin/mysql_dump_all
 
-=== Files
+
+== Backup
+
+  /etc
+  /home
+  /root
+  /usr/local
+  /usr/share (?)
+  /var/backups
+
+
+== Restore
 
   ~/
     .bashrc
     .config/chromium
     .gitconfig
     .gtk-bookmarks
+    .icons
     .jungledisk
     .mozilla
     .ssh
@@ -197,31 +209,33 @@ Databases should be dumped to /var/backups/mysql.sql.gz
   ~/.gnome2/
     gedit
     gtksourceview-1.0
-    panel2.d              # then drag onto panel
+    hamster-applet/hamster.db
+    panel2.d/default/launchers/*    # then drag onto panel
 
   ~/.local/share/
     rhythmbox
+
+  /etc/
+    hosts
+    apache2/
+      mods-available
+      mods-enabled
+      sites-available
+      sites-enabled
 
   /usr/
     local/
       sbin/*
       share/fonts/*
+    share/
+      mime/
+        packages/rails.xml    # then: sudo update-mime-database /usr/share/mime
+      gtksourceview-2.0/language-specs/
+        erb.lang
+        yaml.lang
 
 
 == Old Stuff
-
-  # Python
-  sudo apt-get install python-mysqldb
-  wget http://peak.telecommunity.com/dist/ez_setup.py
-  sudo python ez_setup.py
-  rm ez_setup.py
-
-  # Pylons + SPNwww
-  sudo apt-get install python-zodb
-  sudo easy_install Pylons
-  sudo easy_install twForms
-  sudo easy_install twTinyMCE
-  # install path module (http://www.jorendorff.com/articles/python/path/)
 
   # OpenOffice/ODBC
   sudo apt-get install unixodbc libmyodbc unixodbc-bin
