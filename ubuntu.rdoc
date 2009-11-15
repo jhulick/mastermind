@@ -1,4 +1,4 @@
-= Ubuntu/Gnome (Januty)
+= Ubuntu/Gnome (Karmic)
 
 == Update System
 
@@ -27,12 +27,12 @@
 
 == Printer
 
-In Firefox go to: http://localhost:631 and click 'add printer'.
+In web browser, go to: http://localhost:631 and click 'Add Printer' under the 'Administration' tab.
 
+* If prompted for password use Ubuntu account name/pw.
 * Use HTTP (Internet Printing Protocol)
 * URI is: http://192.168.0.100:631/printers/Lexmark_T430
 * Provide PPD from: private/software/drivers/Lexmark/...
-* If prompted for password use Ubuntu account name/pw.
 * Change Media Source to 'Tray 1' ('Auto' selects manual feeder)
 
 Finish...
@@ -42,10 +42,17 @@ Finish...
 
 === Basic
 
-  sudo apt-get install ubuntu-restricted-extras rar ntp xchm \
-    compizconfig-settings-manager inkscape transmission hamster-applet
+  sudo apt-get install ubuntu-restricted-extras rar ntp xchm inkscape \
+    compizconfig-settings-manager transmission hamster-applet
 
-Then install Skype from .deb package.
+=== Chrome
+
+sudo su
+echo "deb http://ppa.launchpad.net/chromium-daily/ppa/ubuntu karmic main" >> /etc/apt/sources.list
+echo "deb-src http://ppa.launchpad.net/chromium-daily/ppa/ubuntu karmic main" >> /etc/apt/sources.list
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4E5E17B5
+apt-get update && apt-get install chromium-browser
+
 
 === JungleDisk
 
@@ -57,14 +64,8 @@ Then install Skype from .deb package.
 
 === Development Basics
 
-  sudo apt-get install build-essential vim-full vim-ruby \
+  sudo apt-get install build-essential vim-gnome \
     gedit-plugins meld rpl curl subversion git-core imagemagick
-
-  git config --global user.email alex@alexreisner.com
-  git config --global user.name alexreisner
-  git config --global color.diff auto
-  git config --global color.status auto
-  git config --global color.branch auto
 
 === W3C Markup Validator
 
@@ -120,12 +121,11 @@ This is accessed at http://localhost/w3c-markup-validator
 === Gems, Rails, etc
 
   cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/56227/rubygems-1.3.3.tgz
-  sudo tar -xf rubygems-1.3.3.tgz
-  cd rubygems-1.3.3
+  sudo wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz
+  sudo tar -xf rubygems-1.3.5.tgz
+  cd rubygems-1.3.5
   sudo ruby setup.rb
   sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
-  sudo gem update --system
   sudo gem install ruby-debug rails
 
 === Passenger
@@ -150,7 +150,15 @@ This is accessed at http://localhost/w3c-markup-validator
   sudo apt-get build-dep libsqlite3-ruby1.8
   sudo gem install sqlite3-ruby
 
+=== Chadwick
 
+  cd /usr/local/src
+  sudo wget http://downloads.sourceforge.net/project/chadwick/chadwick-0.5/0.5.2/chadwick-0.5.2.tar.gz 
+  sudo tar xf chadwick-0.5.2.tar.gz 
+  cd chadwick-0.5.2
+  ./configure
+  make
+  sudo make install
 
 == Add Configuration Editor to Menu
 
@@ -174,12 +182,12 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 
   ~/
     .bashrc
+    .config/chromium
     .gitconfig
     .gtk-bookmarks
     .jungledisk
     .mozilla
     .ssh
-    .subversion
     .vimrc
     
   ~/.gconf/apps/
@@ -193,6 +201,11 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 
   ~/.local/share/
     rhythmbox
+
+  /usr/
+    local/
+      sbin/*
+      share/fonts/*
 
 
 == Old Stuff
