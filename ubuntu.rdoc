@@ -176,7 +176,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
   sudo crontab -e
   
   # m h  dom mon dow   command
-  0 0 * * 3 /usr/local/sbin/mysql_dump_all
+  0 3 * * * /usr/local/sbin/mysql_dump_all
 
 
 == Backup
