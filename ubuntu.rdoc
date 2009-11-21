@@ -186,7 +186,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
   /home
   /root
   /usr/local
-  /usr/share (?)
+  /usr/share
   /var/backups
 
 
