@@ -202,6 +202,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
     .mozilla
     .ssh
     .vimrc
+    .vim/*
     .wallpaper
     
   ~/.gconf/apps/
@@ -215,6 +216,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
     panel2.d/default/launchers/*    # then drag onto panel
 
   ~/.local/share/
+    applications/gvim-tab.desktop   # for opening in new GVim tab
     rhythmbox
 
   /etc/
