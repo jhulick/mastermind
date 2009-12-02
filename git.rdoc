@@ -1,5 +1,7 @@
 = Git
 
+== Branches and Merging
+
 If you do 'git pull' and get the annoying "You asked me to pull without telling me which branch..." message:
 
   git config branch.master.remote origin
@@ -7,4 +9,14 @@ If you do 'git pull' and get the annoying "You asked me to pull without telling 
   # or:
 
   git config branch.master.merge refs/heads/master
+
+
+== Delete a Remote Branch
+
+To delete a remote branch:
+
+  git push origin :heads/some-branch
+
+Yes, seriously, this will delete some-branch. Make sure to include the colon.
+
 
