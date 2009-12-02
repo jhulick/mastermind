@@ -16,4 +16,12 @@ To set as default editor:
   # apply immediately:
   source ~/.bashrc
 
+To transform character case:
+
+  gu            to lowercase
+  gU            to uppercase
+
+To syntax check current Ruby file:
+
+  :!ruby -c %
 
