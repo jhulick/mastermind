@@ -58,7 +58,8 @@ You may also need to load a private key for authenticating to your code reposito
 Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick, etc:
 
   sudo apt-get -y install mysql-server postfix imagemagick logrotate \
-    build-essential curl git-core apache2-mpm-worker apache2-threaded-dev
+    build-essential curl git-core apache2-mpm-worker apache2-threaded-dev \
+    memcached
 
 
 == Ruby (Enterprise Edition)
