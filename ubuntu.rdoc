@@ -111,7 +111,8 @@ This is accessed at http://localhost/w3c-markup-validator
 
 === Ruby
 
-  sudo apt-get install ruby1.8 ri ruby1.8-dev rdoc irb libmysql-ruby libopenssl-ruby
+  sudo apt-get install ruby1.8 ri ruby1.8-dev rdoc irb \
+    libmysql-ruby libopenssl-ruby memcached
   
   # only if binaries not found in path:
   sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
@@ -183,7 +184,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 == Backup
 
   /etc
-  /home
+  /home          # except .cache
   /root
   /usr/local
   /usr/share
@@ -195,6 +196,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
   ~/
     .bashrc
     .config/chromium
+    .gemrc
     .gitconfig
     .gtk-bookmarks
     .icons
