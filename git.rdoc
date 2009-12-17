@@ -5,9 +5,6 @@
 If you do 'git pull' and get the annoying "You asked me to pull without telling me which branch..." message:
 
   git config branch.master.remote origin
-
-  # or:
-
   git config branch.master.merge refs/heads/master
 
 
