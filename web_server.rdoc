@@ -58,39 +58,38 @@ You may also need to load a private key for authenticating to your code reposito
 Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick, etc:
 
   sudo apt-get -y install mysql-server postfix imagemagick logrotate \
-    build-essential curl git-core apache2-mpm-worker apache2-threaded-dev \
-    memcached
+    build-essential curl git-core apache2-mpm-worker apache2-threaded-dev
 
 
 == Ruby (Enterprise Edition)
 
   sudo apt-get -y install zlib1g-dev libssl-dev libreadline5-dev libmysql-ruby1.8 libmysqlclient15-dev
   cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/64475/ruby-enterprise-1.8.7-20090928.tar.gz
-  sudo tar xzvf ruby-enterprise-1.8.7-20090928.tar.gz
-  sudo ruby-enterprise-1.8.7-20090928/installer
+  sudo wget http://rubyforge.org/frs/download.php/66162/ruby-enterprise-1.8.7-2009.10.tar.gz
+  sudo tar xzvf ruby-enterprise-1.8.7-2009.10.tar.gz
+  sudo ruby-enterprise-1.8.7-2009.10/installer
 
   cd /usr/local/bin
-  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/ruby
-  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/gem
-  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/irb
-  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/rake
+  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/ruby
+  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/gem
+  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/irb
+  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/rake
 
 
 == Passenger
 
 Install:
 
-  sudo /opt/ruby-enterprise-1.8.7-20090928/bin/passenger-install-apache2-module -a
+  sudo /opt/ruby-enterprise-1.8.7-2009.10/bin/passenger-install-apache2-module -a
 
 Configure:
 
   sudo vi /etc/apache2/mods-enabled/passenger.load
   
   # add lines:
-  LoadModule passenger_module /opt/ruby-enterprise-1.8.7-20090928/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
-  PassengerRoot /opt/ruby-enterprise-1.8.7-20090928/lib/ruby/gems/1.8/gems/passenger-2.2.5
-  PassengerRuby /opt/ruby-enterprise-1.8.7-20090928/bin/ruby
+  LoadModule passenger_module /opt/ruby-enterprise-1.8.7-2009.10/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
+  PassengerRoot /opt/ruby-enterprise-1.8.7-2009.10/lib/ruby/gems/1.8/gems/passenger-2.2.5
+  PassengerRuby /opt/ruby-enterprise-1.8.7-2009.10/bin/ruby
   # save and exit
 
 Create symlink and restart Apache:
@@ -103,7 +102,7 @@ Create symlink and restart Apache:
 
   sudo gem source -a http://gems.github.com
   sudo gem install ruby-debug pony chronic javan-whenever
-  sudo ln -s /opt/ruby-enterprise-1.8.7-20090928/bin/whenever /usr/local/bin/whenever
+  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/whenever /usr/local/bin/whenever
 
 
 == MySQL Configuration
@@ -112,7 +111,7 @@ Use UTF-8:
 
   sudo vi /etc/mysql/my.cnf
   
-  # add lines:
+  # add lines in [mysqld] section:
   character-set-server=utf8
   default-collation=utf8_unicode_ci
   # save and exit
