@@ -42,25 +42,22 @@ Finish...
 
 === Basic
 
+Install various commonly-used packages:
+
   sudo apt-get install ubuntu-restricted-extras rar ntp xchm inkscape \
     compizconfig-settings-manager transmission hamster-applet
 
-=== Chrome
+Install Chrome beta from Google .deb package:
 
-  sudo su
-  echo "deb http://ppa.launchpad.net/chromium-daily/ppa/ubuntu karmic main" >> /etc/apt/sources.list
-  echo "deb-src http://ppa.launchpad.net/chromium-daily/ppa/ubuntu karmic main" >> /etc/apt/sources.list
-  apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4E5E17B5
-  apt-get update && apt-get install chromium-browser
+  http://www.google.com/chrome?platform=linux
 
+Install Skype from .deb package:
 
-=== JungleDisk
+  http://www.skype.com/download/skype/linux/
 
-  # fuse
-  sudo apt-get install fuse-utils
-  # davfs
-  sudo apt-get install davfs2
-  [sudo mount -t davfs http://localhost:2667 /mnt/jungledisk -o nolocks]
+Install JungleDisk from .deb package (requires login):
+
+  https://jungledisk.com/downloads/personal/desktop/linux/
 
 === Development Basics
 
@@ -195,7 +192,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 
   ~/
     .bashrc
-    .config/chromium
+    .config/google-chrome
     .gemrc
     .gitconfig
     .gtk-bookmarks
