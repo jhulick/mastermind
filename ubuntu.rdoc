@@ -134,7 +134,7 @@ This is accessed at http://localhost/w3c-markup-validator
 
 === PHP
 
-  sudo apt-get install php5 php5-gd php5-mysql
+  sudo apt-get install php5 php5-gd php5-mysql php-pear
 
 === PostgreSQL, PostGIS
 
