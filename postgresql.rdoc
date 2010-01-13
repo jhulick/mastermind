@@ -1,8 +1,16 @@
 = PostgreSQL
 
+== Set a Password
+
+To set a password for the root ('postgres') user:
+
+  $ sudo su postgres -c psql template1
+  template1=# ALTER USER postgres with PASSWORD 'password';
+  template1=# \q
+
 == 'ident' Authentication Error
 
-Use password instead of ident auth. Edit /etc/postgresql/8.3/main/pg_hba.conf and change the line at the bottom of the file that specifies 'ident':
+To use password instead of ident auth, edit /etc/postgresql/8.4/main/pg_hba.conf and change the line at the bottom of the file that specifies 'ident':
 
   local   all         all                               password
 
