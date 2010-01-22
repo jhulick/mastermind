@@ -44,7 +44,7 @@ Finish...
 
 Install various commonly-used packages:
 
-  sudo apt-get install ubuntu-restricted-extras rar ntp xchm inkscape \
+  sudo apt-get install ubuntu-restricted-extras rar p7zip ntp xchm inkscape \
     compizconfig-settings-manager transmission hamster-applet
 
 Install Chrome beta from Google .deb package:
