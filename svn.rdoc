@@ -83,13 +83,9 @@ First, create a new repository on your SVN server/host. Then:
 
   # Set some svn:ignores.
   svn propset svn:ignore "database.yml" config
-  svn propset svn:ignore "schema.rb" db
   svn propset svn:ignore "*.log" log
   svn propset svn:ignore "*" doc
-  svn propset svn:ignore "*" tmp/cache
-  svn propset svn:ignore "*" tmp/pids
-  svn propset svn:ignore "*" tmp/sessions
-  svn propset svn:ignore "*" tmp/sockets
+  svn propset svn:ignore "*" tmp
   svn propset svn:executable "*" `find script -type f | grep -v '.svn'` public/dispatch.*
 
   # Commit.
