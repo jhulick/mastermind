@@ -28,9 +28,9 @@ Version 6.4.7 and above supports -kerning option:
   sudo apt-get install libperl-dev libfontconfig1-dev libpng12-dev libjpeg-dev
   
   cd /usr/local/src
-  sudo wget ftp://ftp.fifi.org/pub/ImageMagick/ImageMagick-6.5.0-0.tar.gz
-  sudo tar xvfz ImageMagick-6.5.0-0.tar.gz
-  cd ImageMagick-6.5.0-0
+  sudo wget ftp://ftp.fifi.org/pub/ImageMagick/ImageMagick-6.5.9-1.tar.gz
+  sudo tar xvfz ImageMagick-6.5.9-1.tar.gz
+  cd ImageMagick-6.5.9-1
   ./configure --with-fontconfig=yes
   make
   sudo make install
