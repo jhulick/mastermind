@@ -65,32 +65,24 @@ Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick,
 
   sudo apt-get -y install zlib1g-dev libssl-dev libreadline5-dev libmysql-ruby1.8 libmysqlclient15-dev
   cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/66162/ruby-enterprise-1.8.7-2009.10.tar.gz
-  sudo tar xzvf ruby-enterprise-1.8.7-2009.10.tar.gz
-  sudo ruby-enterprise-1.8.7-2009.10/installer
-
-  cd /usr/local/bin
-  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/ruby
-  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/gem
-  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/irb
-  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/rake
+  sudo wget http://rubyforge.org/frs/download.php/68720/ruby-enterprise_1.8.7-2010.01_amd64.deb
+  sudo dpkg -i ruby-enterprise_1.8.7-2010.01_amd64.deb
 
 
 == Passenger
 
 Install:
 
-  sudo /opt/ruby-enterprise-1.8.7-2009.10/bin/passenger-install-apache2-module -a
+  sudo /usr/local/bin/passenger-install-apache2-module
 
 Configure:
 
   sudo vi /etc/apache2/mods-enabled/passenger.load
   
   # add lines:
-  LoadModule passenger_module /opt/ruby-enterprise-1.8.7-2009.10/lib/ruby/gems/1.8/gems/passenger-2.2.5/ext/apache2/mod_passenger.so
-  PassengerRoot /opt/ruby-enterprise-1.8.7-2009.10/lib/ruby/gems/1.8/gems/passenger-2.2.5
-  PassengerRuby /opt/ruby-enterprise-1.8.7-2009.10/bin/ruby
-  # save and exit
+  LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9/ext/apache2/mod_passenger.so
+  PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9
+  PassengerRuby /usr/local/bin/ruby
 
 Create symlink and restart Apache:
 
@@ -102,7 +94,6 @@ Create symlink and restart Apache:
 
   sudo gem source -a http://gems.github.com
   sudo gem install ruby-debug pony chronic javan-whenever
-  sudo ln -s /opt/ruby-enterprise-1.8.7-2009.10/bin/whenever /usr/local/bin/whenever
 
 
 == MySQL Configuration
