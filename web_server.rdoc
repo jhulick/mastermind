@@ -19,6 +19,10 @@ Set time zone:
   cp /etc/localtime /etc/localtime.bak
   ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 
+Set host name:
+
+  hostname [host name]
+
 Create a developer user account and give sudo privileges.
 
   adduser [username] # then answer various prompts
@@ -57,13 +61,18 @@ You may also need to load a private key for authenticating to your code reposito
 
 Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick, etc:
 
-  sudo apt-get -y install mysql-server postfix imagemagick logrotate \
+  sudo apt-get -y install mysql-server postfix imagemagick logrotate monit \
     build-essential curl git-core apache2-mpm-worker apache2-threaded-dev
+
+Make vi the default editor:
+
+  echo 'export EDITOR=vi' >> ~/.bashrc
+  source ~/.bashrc
 
 
 == Ruby (Enterprise Edition)
 
-  sudo apt-get -y install zlib1g-dev libssl-dev libreadline5-dev libmysql-ruby1.8 libmysqlclient15-dev
+  sudo apt-get -y install libmysql-ruby1.8 libmysqlclient15-dev
   cd /usr/local/src
   sudo wget http://rubyforge.org/frs/download.php/68720/ruby-enterprise_1.8.7-2010.01_amd64.deb
   sudo dpkg -i ruby-enterprise_1.8.7-2010.01_amd64.deb
@@ -77,7 +86,7 @@ Install:
 
 Configure:
 
-  sudo vi /etc/apache2/mods-enabled/passenger.load
+  sudo vi /etc/apache2/mods-available/passenger.load
   
   # add lines:
   LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9/ext/apache2/mod_passenger.so
@@ -166,12 +175,20 @@ and reload:
 
 == Cron
 
-Configure email address to receive notifications:
+Configure email address to receive notifications (app user):
 
   crontab -e
   
   # add at top:
   MAILTO=alex@alexreisner.com
+  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  
+Logrotate (for root user):
+
+  sudo crontab -e
+
+  # add:
+  0 0  *  *  * /usr/sbin/logrotate /etc/logrotate.conf
 
 
 == Web Sites
