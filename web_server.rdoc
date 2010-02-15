@@ -162,7 +162,11 @@ Restart:
 
 == Postfix Configuration
 
-Edit config (<tt>/etc/postfix/main.cf</tt>):
+Edit master config (<tt>/etc/postfix/master.cf</tt>). Replace first line with:
+
+  127.0.0.1:smtp      inet  n       -       n       -       -       smtpd
+  
+Edit main config (<tt>/etc/postfix/main.cf</tt>):
 
   sudo postconf -e 'smtpd_reject_unlisted_recipient = no'
   sudo postconf -e 'mydestination = localhost.localdomain, localhost'
