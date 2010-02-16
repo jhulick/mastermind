@@ -19,9 +19,10 @@ Set time zone:
   cp /etc/localtime /etc/localtime.bak
   ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 
-Set host name:
+Set host and mail name:
 
-  hostname [host name]
+  echo '[hostname]' > /etc/hostname
+  echo '[hostname]' > /etc/mailname
 
 Create a developer user account and give sudo privileges.
 
@@ -240,4 +241,12 @@ Add /etc/logrotate.d/[app_name]:
     copytruncate
   }
 
+
+== Reboot & Verify
+
+Do a soft reboot of the machine and make sure all services come up as expected:
+
+# <tt>hostname</tt> should be correct
+# <tt>ssh [hostname] 25</tt> should refuse connection
+# all daemons should launch
 
