@@ -162,6 +162,8 @@ Restart:
 
 == Postfix Configuration
 
+Firstly, be sure to <b>configure reverse DNS</b> using the hosting provider's control panel. Failure to do so will result in massive email delivery failure.
+
 Edit master config (<tt>/etc/postfix/master.cf</tt>). Replace first line with:
 
   127.0.0.1:smtp      inet  n       -       n       -       -       smtpd
