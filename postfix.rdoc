@@ -12,3 +12,14 @@ You might want to try re-generating the certificate or, to disable TLS altogethe
   sudo postconf -e smtpd_use_tls=no
   sudo /etc/init.d/postfix reload
 
+
+== Mail Queue
+
+To view the mail queue:
+
+  mailq
+
+To remove all deferred messages from the queue:
+
+  sudo postsuper -d ALL deferred
+
