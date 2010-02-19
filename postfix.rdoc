@@ -19,6 +19,10 @@ To view the mail queue:
 
   mailq
 
+To show a full message:
+
+  postcat -q [message_id]
+
 To remove all deferred messages from the queue:
 
   sudo postsuper -d ALL deferred
