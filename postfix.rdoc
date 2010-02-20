@@ -21,7 +21,7 @@ To view the mail queue:
 
 To show a full message:
 
-  postcat -q [message_id]
+  sudo postcat -q [message_id]
 
 To remove all deferred messages from the queue:
 
