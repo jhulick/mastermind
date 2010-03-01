@@ -120,9 +120,9 @@ This is accessed at http://localhost/w3c-markup-validator
 === Gems, Rails, etc
 
   cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/60718/rubygems-1.3.5.tgz
-  sudo tar -xf rubygems-1.3.5.tgz
-  cd rubygems-1.3.5
+  sudo wget http://rubyforge.org/frs/download.php/69365/rubygems-1.3.6.tgz
+  sudo tar -xf rubygems-1.3.6.tgz
+  cd rubygems-1.3.6
   sudo ruby setup.rb
   sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
   sudo gem install ruby-debug rails mongrel autotest-rails capistrano jekyll
