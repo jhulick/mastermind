@@ -109,7 +109,7 @@ This is accessed at http://localhost/w3c-markup-validator
 === Ruby
 
   sudo apt-get install ruby1.8 ri ruby1.8-dev rdoc irb \
-    libmysql-ruby libopenssl-ruby memcached
+    libmysql-ruby1.8 libmysqlclient15-dev libopenssl-ruby
   
   # only if binaries not found in path:
   sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
