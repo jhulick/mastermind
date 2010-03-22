@@ -246,7 +246,7 @@ Add /etc/logrotate.d/[app_name]:
 
 Do a soft reboot of the machine and make sure all services come up as expected:
 
-# <tt>hostname</tt> should be correct
-# <tt>ssh [hostname] 25</tt> should refuse connection
-# all daemons should launch
+1. <tt>hostname</tt> should be correct
+2. <tt>telnet [hostname] 25</tt> should refuse connection
+3. all daemons should launch
 
