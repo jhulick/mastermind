@@ -64,7 +64,8 @@ Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick,
 
   sudo apt-get -y install mysql-server postfix imagemagick logrotate monit \
     build-essential curl git-core apache2-mpm-worker apache2-threaded-dev \
-    libxml2-dev libxslt1-dev
+    redis-server libxml2-dev libxslt1-dev
+  # redis-server is not available on Hardy, but will be on Lucid (v1.2)
 
 Make vi the default editor:
 

@@ -62,7 +62,7 @@ Install JungleDisk from .deb package (requires login):
 === Development Basics
 
   sudo apt-get install build-essential vim-gnome gedit-plugins meld rpl \
-    curl subversion git-core imagemagick libxml2-dev libxslt1-dev
+    curl subversion git-core imagemagick libxml2-dev libxslt1-dev redis-server
   git config --global push.default matching
 
 === W3C Markup Validator
