@@ -60,9 +60,9 @@ You may also need to load a private key for authenticating to your code reposito
 
 == Basic Software
 
-Install Apache, MySQL, and various tools like logrotate, curl, Git, ImageMagick, etc:
+Install web server and basic tools like logrotate, curl, Git, ImageMagick, etc:
 
-  sudo apt-get -y install mysql-server postfix imagemagick logrotate monit \
+  sudo apt-get -y install imagemagick logrotate monit \
     build-essential curl git-core apache2-mpm-worker apache2-threaded-dev \
     redis-server libxml2-dev libxslt1-dev
   # redis-server is not available on Hardy, but will be on Lucid (v1.2)
@@ -73,9 +73,38 @@ Make vi the default editor:
   source ~/.bashrc
 
 
+== MySQL
+
+Install:
+
+  sudo apt-get -y install mysql-server libmysql-ruby1.8 libmysqlclient15-dev
+
+Use UTF-8:
+
+  sudo vi /etc/mysql/my.cnf
+  
+  # add lines in [mysqld] section:
+  character-set-server=utf8
+  default-collation=utf8_unicode_ci
+  # save and exit
+  
+  sudo /etc/init.d/mysql restart
+
+
+== SQLite
+
+Install:
+
+  sudo apt-get -y install sqlite3
+
+Ruby support:
+
+  sudo apt-get build-dep libsqlite3-ruby1.8
+  sudo gem install sqlite3-ruby
+
+
 == Ruby (Enterprise Edition)
 
-  sudo apt-get -y install libmysql-ruby1.8 libmysqlclient15-dev
   cd /usr/local/src
   sudo wget http://rubyforge.org/frs/download.php/68720/ruby-enterprise_1.8.7-2010.01_amd64.deb
   sudo dpkg -i ruby-enterprise_1.8.7-2010.01_amd64.deb
@@ -107,20 +136,6 @@ Create symlink and restart Apache:
   sudo gem update --system
   sudo gem source -a http://gems.github.com
   sudo gem install ruby-debug pony chronic javan-whenever
-
-
-== MySQL Configuration
-
-Use UTF-8:
-
-  sudo vi /etc/mysql/my.cnf
-  
-  # add lines in [mysqld] section:
-  character-set-server=utf8
-  default-collation=utf8_unicode_ci
-  # save and exit
-  
-  sudo /etc/init.d/mysql restart
 
 
 == Apache Configuration
@@ -164,9 +179,13 @@ Restart:
   sudo apache2ctl graceful
 
 
-== Postfix Configuration
+== Postfix
 
-Firstly, be sure to <b>configure reverse DNS</b> using the hosting provider's control panel. Failure to do so will result in massive email delivery failure.
+Install:
+
+sudo apt-get -y install postfix
+
+Be sure to <b>configure reverse DNS</b> using the hosting provider's control panel. Failure to do so will result in massive email delivery failure.
 
 Edit master config (<tt>/etc/postfix/master.cf</tt>). Replace first line with:
 
