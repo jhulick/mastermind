@@ -2,6 +2,10 @@
 
 == Branches and Merging
 
+To checkout a local branch that tracks a remote branch:
+
+  git checkout -t origin/branch
+
 If you do 'git pull' and get the annoying "You asked me to pull without telling me which branch..." message:
 
   git config branch.master.remote origin
