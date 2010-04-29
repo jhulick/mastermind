@@ -188,5 +188,5 @@ The following is a configuration file for a blind, anonymous-only FTP server. Us
 
 To delete files which have not been accessed in the past 30 days, add to root's crontab:
 
-  find /home/ftp -atime +30 -delete
+  0 3 * * * find /home/ftp -atime +30 -delete
 
