@@ -60,8 +60,8 @@ Install various commonly-used packages:
 Install other common software from .deb packages:
 
 * Google Chrome: http://www.google.com/chrome?platform=linux
-* Skype: http://www.skype.com/download/skype/linux/
-* JungleDisk: https://jungledisk.com/downloads/personal/desktop/linux/
+* Skype: http://www.skype.com/download/skype/linux
+* JungleDisk: https://jungledisk.com/downloads/personal/desktop/linux
 
 Install Firefox plugins:
 
@@ -117,14 +117,14 @@ As of Lucid, the module seems to be configured automatically, but in case not:
 
 See http://rvm.beginrescueend.com/rvm/install for latest install procedure. On May 5, 2010 it was:
 
-	bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+  bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
 
 Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
 
   sudo apt-get install bison libssl-dev libreadline5-dev libreadline6-dev
   rvm install 1.8.7
 
-	gem install rails mysql ruby-debug mongrel autotest-rails capistrano jekyll
+  gem install rails mysql ruby-debug mongrel autotest-rails capistrano jekyll
 
 The following used to be necessary but don't seem to be anymore:
 
@@ -133,7 +133,7 @@ The following used to be necessary but don't seem to be anymore:
 === Passenger
 
   gem install passenger
-	~/.rvm/gems/ruby-1.8.7-p249/bin/passenger-install-apache2-module
+  ~/.rvm/gems/ruby-1.8.7-p249/bin/passenger-install-apache2-module
 
 === PHP
 
