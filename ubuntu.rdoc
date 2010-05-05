@@ -1,4 +1,14 @@
-= Ubuntu/Gnome (Karmic)
+= Ubuntu/Gnome (Lucid)
+
+Firstly, to move min/max/close buttons back to the right side of the title bar:
+
+* Launch the Configuration Editor (Alt+F2, then type 'gconf-editor').
+* Change the value at app > metacity > general > button_layout to:
+
+  menu:minimize,maximize,close
+
+Why the heck did they do this?
+
 
 == Update System
 
@@ -47,31 +57,26 @@ Install various commonly-used packages:
   sudo apt-get install ubuntu-restricted-extras rar p7zip ntp xchm inkscape \
     compizconfig-settings-manager transmission hamster-applet
 
-Install Chrome beta from Google .deb package:
+Install other common software from .deb packages:
 
-  http://www.google.com/chrome?platform=linux
+* Google Chrome: http://www.google.com/chrome?platform=linux
+* Skype: http://www.skype.com/download/skype/linux/
+* JungleDisk: https://jungledisk.com/downloads/personal/desktop/linux/
 
-Install Skype from .deb package:
+Install Firefox plugins:
 
-  http://www.skype.com/download/skype/linux/
-
-Install JungleDisk from .deb package (requires login):
-
-  https://jungledisk.com/downloads/personal/desktop/linux/
+* Firebug
+* Web Developer
+* Live HTTP Headers
 
 === Development Basics
 
-  sudo apt-get install build-essential vim-gnome gedit-plugins meld rpl \
-    curl subversion git-core imagemagick libxml2-dev libxslt1-dev redis-server
+  sudo apt-get install build-essential gedit-plugins meld rpl curl \
+    subversion git-core imagemagick libxml2-dev libxslt1-dev \
+    redis-server w3c-markup-validator
   git config --global push.default matching
 
-=== W3C Markup Validator
-
-This is accessed at http://localhost/w3c-markup-validator
-
-  sudo apt-get install w3c-markup-validator
-  sudo mkdir /usr/local/validator
-  sudo ln -s /usr/share/w3c-markup-validator/templates /usr/local/validator/templates
+The W3C Markup Validator is accessed at http://localhost/w3c-markup-validator
 
 === Apache
 
@@ -85,6 +90,8 @@ This is accessed at http://localhost/w3c-markup-validator
   cd mod_xsendfile-0.9
   sudo apxs2 -cia mod_xsendfile.c
 
+As of Lucid, the module seems to be configured automatically, but in case not:
+
   # create /etc/apache2/mods-available/xsendfile.load
   LoadModule xsendfile_module /usr/lib/apache2/modules/mod_xsendfile.so
 
@@ -95,7 +102,7 @@ This is accessed at http://localhost/w3c-markup-validator
 
 === MySQL
 
-  sudo apt-get install mysql-server mysql-admin mysql-query-browser
+  sudo apt-get install mysql-server
 
   # add to [mysqld] section of /etc/mysql/my.cnf:
   character-set-server = utf8
@@ -106,31 +113,27 @@ This is accessed at http://localhost/w3c-markup-validator
   # restart:
   sudo /etc/init.d/mysql restart
 
-=== Ruby
+=== Ruby (via Ruby Version Manager)
 
-  sudo apt-get install ruby1.8 ri ruby1.8-dev rdoc irb \
-    libmysql-ruby1.8 libmysqlclient15-dev libopenssl-ruby
-  
-  # only if binaries not found in path:
-  sudo ln -s /usr/bin/ruby1.8 /usr/local/bin/ruby
-  sudo ln -s /usr/bin/ri1.8 /usr/local/bin/ri
-  sudo ln -s /usr/bin/rdoc1.8 /usr/local/bin/rdoc
-  sudo ln -s /usr/bin/irb1.8 /usr/local/bin/irb
+See http://rvm.beginrescueend.com/rvm/install for latest install procedure. On May 5, 2010 it was:
 
-=== Gems, Rails, etc
+	bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
 
-  cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/69365/rubygems-1.3.6.tgz
-  sudo tar -xf rubygems-1.3.6.tgz
-  cd rubygems-1.3.6
-  sudo ruby setup.rb
-  sudo ln -s /usr/bin/gem1.8 /usr/local/bin/gem
-  sudo gem install ruby-debug rails mongrel autotest-rails capistrano jekyll
+Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
+
+  sudo apt-get install bison libssl-dev libreadline5-dev libreadline6-dev
+  rvm install 1.8.7
+
+	gem install rails mysql ruby-debug mongrel autotest-rails capistrano jekyll
+
+The following used to be necessary but don't seem to be anymore:
+
+  sudo apt-get install libmysql-ruby1.8 libmysqlclient15-dev libopenssl-ruby
 
 === Passenger
 
-  sudo gem install passenger
-  sudo passenger-install-apache2-module
+  gem install passenger
+	~/.rvm/gems/ruby-1.8.7-p249/bin/passenger-install-apache2-module
 
 === PHP
 
@@ -144,10 +147,10 @@ This is accessed at http://localhost/w3c-markup-validator
 
   sudo apt-get install sqlite3
 
-=== Ruby SQLite Support
+Ruby support:
 
   sudo apt-get build-dep libsqlite3-ruby1.8
-  sudo gem install sqlite3-ruby
+  gem install sqlite3-ruby
 
 === Chadwick
 
@@ -180,6 +183,8 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 
 == Backup
 
+Dump all MySQL databases, then backup directory contents:
+
   /etc
   /home          # except .cache
   /root
@@ -191,18 +196,16 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 == Restore
 
   ~/
+    .backgrounds
     .bashrc
-    .config/google-chrome
-    .gemrc
+    .config/google-chrome/Default
     .gitconfig
     .gtk-bookmarks
     .icons
     .jungledisk
-    .mozilla
     .ssh
     .vimrc
     .vim/*
-    .wallpaper
     
   ~/.gconf/apps/
     gedit-2
