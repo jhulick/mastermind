@@ -31,8 +31,6 @@ The following is a configuration file for a blind, anonymous-only FTP server. Us
   TimeoutStalled        600
   TimeoutIdle           1200
 
-  DisplayLogin          welcome.msg
-  DisplayChdir          .message true
   ListOptions           "-l"
 
   DenyFilter            \*.*/
@@ -164,11 +162,6 @@ The following is a configuration file for a blind, anonymous-only FTP server. Us
 
     # Limit the maximum number of anonymous logins
     MaxClients              10
-
-    # We want 'welcome.msg' displayed at login, and '.message' displayed
-    # in each newly chdired directory.
-    DisplayLogin            welcome.msg
-    DisplayChdir            .message
 
     # Allow login for anonymous user
     <Limit LOGIN>
