@@ -137,7 +137,7 @@ The following used to be necessary but don't seem to be anymore:
 
 === PHP
 
-  sudo apt-get install php5 php5-gd php5-mysql php-pear
+  sudo apt-get install -y php5 php5-gd php5-mysql php-pear
 
 === PostgreSQL, PostGIS
 
