@@ -1,4 +1,4 @@
-= Web Server (Ubuntu Hardy)
+= Web Server (Ubuntu Lucid)
 
 == First Steps
 
@@ -60,87 +60,22 @@ You may also need to load a private key for authenticating to your code reposito
 
 == Basic Software
 
-Install web server and basic tools like logrotate, curl, Git, ImageMagick, etc:
-
-  sudo apt-get -y install imagemagick logrotate monit \
-    build-essential curl git-core apache2-mpm-worker apache2-threaded-dev \
-    redis-server libxml2-dev libxslt1-dev
-  # redis-server is not available on Hardy, but will be on Lucid (v1.2)
-
 Make vi the default editor:
 
   echo 'export EDITOR=vi' >> ~/.bashrc
   source ~/.bashrc
 
+Install web server and basic tools like logrotate, curl, Git, ImageMagick, etc:
 
-== MySQL
+  sudo apt-get -y install build-essential imagemagick logrotate monit \
+    curl git-core redis-server libxml2-dev libxslt1-dev
 
-Install:
+== Web Server
 
-  sudo apt-get -y install mysql-server libmysql-ruby1.8 libmysqlclient15-dev
+=== Apache
 
-Use UTF-8:
+  sudo apt-get -y install apache2-mpm-worker apache2-threaded-dev
 
-  sudo vi /etc/mysql/my.cnf
-  
-  # add lines in [mysqld] section:
-  character-set-server=utf8
-  default-collation=utf8_unicode_ci
-  # save and exit
-  
-  sudo /etc/init.d/mysql restart
-
-
-== SQLite
-
-Install:
-
-  sudo apt-get -y install sqlite3
-
-Ruby support:
-
-  sudo apt-get build-dep libsqlite3-ruby1.8
-
-
-== Ruby (Enterprise Edition)
-
-  cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/68720/ruby-enterprise_1.8.7-2010.01_amd64.deb
-  sudo dpkg -i ruby-enterprise_1.8.7-2010.01_amd64.deb
-
-
-== Passenger
-
-Install:
-
-  sudo /usr/local/bin/passenger-install-apache2-module
-
-Configure:
-
-  sudo vi /etc/apache2/mods-available/passenger.load
-  
-  # add lines:
-  LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9/ext/apache2/mod_passenger.so
-  PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9
-  PassengerRuby /usr/local/bin/ruby
-
-Create symlink and restart Apache:
-
-  sudo ln -s /etc/apache2/mods-available/passenger.load /etc/apache2/mods-enabled/passenger.load
-  sudo apache2ctl graceful
-  
-  
-== Gems
-
-  sudo gem update --system
-  sudo gem source -a http://gems.github.com
-  sudo gem install ruby-debug pony chronic javan-whenever
-
-  # if using SQLite (MySQL gem installed automatically by Phusion):
-  sudo gem install sqlite3-ruby
-
-== Apache Configuration
-  
 To GZip components, enable Apache's mod_deflate for CSS and JS:
 
   cd /etc/apache2/mods-enabled
@@ -178,6 +113,75 @@ Allow VirtualHosts only on port 80:
 Restart:
 
   sudo apache2ctl graceful
+
+=== Nginx
+
+  sudo apt-get -y install nginx
+
+== Database
+
+=== MySQL
+
+  sudo apt-get -y install mysql-server libmysqlclient-dev
+
+Use UTF-8:
+
+  sudo vi /etc/mysql/my.cnf
+  
+  # add lines in [mysqld] section:
+  character-set-server=utf8
+  default-collation=utf8_unicode_ci
+  # save and exit
+  
+  sudo /etc/init.d/mysql restart
+
+=== SQLite
+
+  sudo apt-get -y install sqlite3
+
+
+== Ruby
+
+  cd /usr/local/src
+  sudo wget http://rubyforge.org/frs/download.php/68720/ruby-enterprise_1.8.7-2010.01_amd64.deb
+  sudo dpkg -i ruby-enterprise_1.8.7-2010.01_amd64.deb
+
+MySQL support:
+
+  sudo apt-get -y install libmysql-ruby1.8
+
+SQLite support:
+
+  sudo apt-get build-dep libsqlite3-ruby1.8
+
+=== Passenger
+
+Install:
+
+  sudo /usr/local/bin/passenger-install-apache2-module
+
+Configure:
+
+  sudo vi /etc/apache2/mods-available/passenger.load
+  
+  # add lines:
+  LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9/ext/apache2/mod_passenger.so
+  PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9
+  PassengerRuby /usr/local/bin/ruby
+
+Create symlink and restart Apache:
+
+  sudo ln -s /etc/apache2/mods-available/passenger.load /etc/apache2/mods-enabled/passenger.load
+  sudo apache2ctl graceful
+  
+=== Gems
+
+  sudo gem update --system
+  sudo gem source -a http://gems.github.com
+  sudo gem install ruby-debug pony chronic javan-whenever
+
+  # if using SQLite (MySQL gem installed automatically by Phusion):
+  sudo gem install sqlite3-ruby
 
 
 == Postfix
@@ -221,38 +225,9 @@ Logrotate (for root user):
   0 0  *  *  * /usr/sbin/logrotate /etc/logrotate.conf
 
 
-== Web Sites
+== Per-Web Site Configuration
 
-=== Apache VirtualHost
-
-  <VirtualHost *:80>
-    ServerName www.[domain]
-    ServerAlias [domain]
-    DocumentRoot [app_root]/public
-
-    # allow x-sendfile:
-    XSendFile on
-    XSendFileAllowAbove on
-
-    # technique for adding far future expires headers taken from:
-    # http://pennysmalls.com/2007/10/19/adding-an-expires-header-with-apache-for-rails/
-    RewriteEngine On
-
-    # add something we can do a directory match on
-    RewriteCond %{QUERY_STRING} ^[0-9]{10}$
-    RewriteRule ^(.*)$ /with_expires_header%{REQUEST_URI} [QSA]
-
-    # the with_expires_header directory is just a symlink to public
-    <Directory "[app_root]/public/with_expires_header">
-      ExpiresActive On
-      ExpiresDefault "access plus 10 years"
-    </Directory>
-  </VirtualHost>
-
-
-=== Log Rotation
-
-Add /etc/logrotate.d/[app_name]:
+In addition to configuring a virtual host for each web application, log rotation should be configured. Add /etc/logrotate.d/[app_name]:
 
   [app_root]/log/*.log {
     size 20M
