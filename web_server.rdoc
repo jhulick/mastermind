@@ -116,6 +116,8 @@ Restart:
 
 === Nginx
 
+<b>Skip this step</b> if you are using Ruby and Passenger (Nginx will be compiled/installed by Passenger module install script).
+
   sudo apt-get -y install nginx
 
 == Database
@@ -156,6 +158,10 @@ SQLite support:
 
 === Passenger
 
+sudo apt-get install libssl-dev
+
+==== for Apache
+
 Install:
 
   sudo /usr/local/bin/passenger-install-apache2-module
@@ -174,6 +180,25 @@ Create symlink and restart Apache:
   sudo ln -s /etc/apache2/mods-available/passenger.load /etc/apache2/mods-enabled/passenger.load
   sudo apache2ctl graceful
   
+==== for Nginx
+
+Install:
+
+  sudo /usr/local/bin/passenger-install-nginx-module
+  # the choose install option #1
+
+Modify /opt/nginx/conf/nginx.conf as directed by installation script.
+
+Start on system startup vi Upstart:
+
+  # create /etc/init/nginx.conf:
+  description     "nginx webserver"
+  start on local-filesystems
+  respawn
+  expect fork
+  exec /opt/nginx/sbin/nginx
+
+
 === Gems
 
   sudo gem update --system
