@@ -65,9 +65,9 @@ Make vi the default editor:
   echo 'export EDITOR=vi' >> ~/.bashrc
   source ~/.bashrc
 
-Install web server and basic tools like logrotate, curl, Git, ImageMagick, etc:
+Install web server and basic tools like logrotate, curl, Git, etc:
 
-  sudo apt-get -y install build-essential imagemagick logrotate monit \
+  sudo apt-get -y install build-essential logrotate monit \
     curl git-core redis-server libxml2-dev libxslt1-dev
 
 == Web Server
