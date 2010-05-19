@@ -1,10 +1,18 @@
 = Git
 
-== Branches and Merging
+== Tracking Branches
 
 To checkout a local branch that tracks a remote branch:
 
-  git checkout -t origin/branch
+  git checkout -t origin/branch-to-track
+
+This is equivalent to:
+
+  git branch --track new-branch origin/branch-to-track
+  git checkout new-branch
+
+
+== Merging Trouble
 
 If you do 'git pull' and get the annoying "You asked me to pull without telling me which branch..." message:
 
