@@ -213,7 +213,7 @@ Start on system startup vi Upstart:
 
 Install:
 
-sudo apt-get -y install postfix
+  sudo apt-get -y install postfix
 
 Be sure to <b>configure reverse DNS</b> using the hosting provider's control panel. Failure to do so will result in massive email delivery failure.
 
