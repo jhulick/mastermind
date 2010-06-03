@@ -29,3 +29,15 @@ To delete a remote branch:
 Yes, seriously, this will delete some-branch. Make sure to include the colon.
 
 
+== Examine a Project Fork
+
+Add the new remote, fetch it, and create a branch to track it:
+
+  git remote add dpeckham git://...
+  git fetch dpeckham
+  git branch dpeckham-fork dpeckham/master
+
+You can now checkout the new branch, explore, and merge into your master:
+
+  git merge dpeckham-fork
+
