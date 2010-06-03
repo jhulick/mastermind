@@ -1,17 +1,5 @@
 = Git
 
-== Tracking Branches
-
-To checkout a local branch that tracks a remote branch:
-
-  git checkout -t origin/branch-to-track
-
-This is equivalent to:
-
-  git branch --track new-branch origin/branch-to-track
-  git checkout new-branch
-
-
 == Merging Trouble
 
 If you do 'git pull' and get the annoying "You asked me to pull without telling me which branch..." message:
@@ -20,13 +8,20 @@ If you do 'git pull' and get the annoying "You asked me to pull without telling 
   git config branch.master.merge refs/heads/master
 
 
-== Delete a Remote Branch
+== Tracking Branches
 
-To delete a remote branch:
+To checkout a local branch that tracks a remote branch:
 
-  git push origin :heads/some-branch
+  git checkout -t origin/branch-to-track
 
-Yes, seriously, this will delete some-branch. Make sure to include the colon.
+To checkout and give it a new name:
+
+  git checkout origin/branch-to-track -b new-branch
+
+The long-hand equivalent:
+
+  git branch --track new-branch origin/branch-to-track
+  git checkout new-branch
 
 
 == Examine a Project Fork
@@ -40,4 +35,48 @@ Add the new remote, fetch it, and create a branch to track it:
 You can now checkout the new branch, explore, and merge into your master:
 
   git merge dpeckham-fork
+
+
+== Delete a Remote Branch
+
+To delete a remote branch:
+
+  git push origin :some-branch
+
+Yes, seriously, this will delete some-branch. Make sure to include the colon.
+
+
+== Restore a Deleted File
+
+Find the commit that deleted the file:
+
+  git log --diff-filter=D --summary
+
+Once the commit is found, fetch the file from the previous commit:
+
+  git checkout 253b3df~1 ohnoes.rb
+
+
+== Rewrite History
+
+Use the following to manipulate git's history of the last 5 commits:
+
+  git rebase -i HEAD~5
+
+Display order is oldest to newest top to bottom. Commits really can be reordered, merged, and deleted all at once. 'fixup' is by far the most useful action. Excellent for when you miss a line in your last commit.
+
+
+== Tagging a Commit
+
+Tags facilitate easy versioning. After your first tag is created, each commit will increment an internal minor release. Use 'git describe' on a repo to see your current version. A repo without a tag can still be described with the --always option.
+
+Create the tag:
+
+  git tag -a 1.0 -m 'tagging as 1.0'
+
+Push the tag to remote
+
+  git push origin master tag 1.0
+
+Tag creation and pushing should be done atomically.
 
