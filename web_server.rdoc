@@ -52,10 +52,10 @@ Now on your local machine:
   ssh-keygen -t rsa -f ~/.ssh/id_rsa
   
   # tell the server about it:
-  ssh [user]@[server] 'cat >>.ssh/authorized_keys' <~/.ssh/id_rsa.pub
+  ssh-copy-id user@server
     <enter password>
 
-You may also need to load a private key for authenticating to your code repositories.
+You may also need to load a private key for authenticating to your code repositories. You can use an agent like keychain (http://www.funtoo.org/en/security/keychain/intro/) for persistant keys.
 
 
 == Basic Software
