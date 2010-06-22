@@ -186,7 +186,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 Dump all MySQL databases, then backup directory contents:
 
   /etc
-  /home          # except .cache
+  /home          # except torrents, .cache, and .local/share/Trash
   /root
   /usr/local
   /usr/share
