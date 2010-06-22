@@ -24,6 +24,18 @@ The long-hand equivalent:
   git checkout new-branch
 
 
+== Pull, Then Re-Apply Local Changes
+
+Instead of using plain old git-pull, do:
+
+  git pull --rebase
+
+This will stash your changes, merge in changes from remote, then apply your changes one at a time, prompting as conflicts occur. This is often easier and cleaner than handling multiple conflicts at once. After resolving each conflict:
+
+  git add ...
+  git rebase --continue
+
+
 == Examine a Project Fork
 
 Add the new remote, fetch it, and create a branch to track it:
