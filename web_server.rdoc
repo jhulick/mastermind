@@ -190,7 +190,7 @@ Install:
 
 Modify <tt>/opt/nginx/conf/nginx.conf</tt> as directed by installation script.
 
-Start on system startup vi Upstart:
+Control/start on boot with Upstart:
 
   # create /etc/init/nginx.conf:
   description     "nginx webserver"
@@ -203,8 +203,7 @@ Start on system startup vi Upstart:
 === Gems
 
   sudo gem update --system
-  sudo gem source -a http://gems.github.com
-  sudo gem install ruby-debug pony chronic javan-whenever
+  sudo gem install ruby-debug pony chronic whenever
 
   # if using SQLite (MySQL gem installed automatically by Phusion):
   sudo gem install sqlite3-ruby
@@ -253,7 +252,7 @@ Logrotate (for root user):
 
 == Per-Web Site Configuration
 
-In addition to configuring a virtual host for each web application, log rotation should be configured. Add /etc/logrotate.d/[app_name]:
+In addition to configuring a virtual host for each web application, log rotation should be configured. Add <tt>/etc/logrotate.d/[app_name]</tt>:
 
   [app_root]/log/*.log {
     size 20M
