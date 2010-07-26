@@ -135,7 +135,8 @@ Use UTF-8:
   default-collation=utf8_unicode_ci
   # save and exit
   
-  sudo /etc/init.d/mysql restart
+  sudo service mysql restart     # for Lucid
+  sudo /etc/init.d/mysql restart # for pre-Lucid
 
 === SQLite
 
