@@ -146,8 +146,8 @@ Use UTF-8:
 == Ruby
 
   cd /usr/local/src
-  sudo wget http://rubyforge.org/frs/download.php/68720/ruby-enterprise_1.8.7-2010.01_amd64.deb
-  sudo dpkg -i ruby-enterprise_1.8.7-2010.01_amd64.deb
+  sudo wget http://rubyforge.org/frs/download.php/71098/ruby-enterprise_1.8.7-2010.02_amd64_ubuntu10.04.deb
+  sudo dpkg -i ruby-enterprise_1.8.7-2010.02_amd64_ubuntu10.04.deb
 
 MySQL support:
 
@@ -188,7 +188,7 @@ Install:
   sudo /usr/local/bin/passenger-install-nginx-module
   # the choose install option #1
 
-Modify /opt/nginx/conf/nginx.conf as directed by installation script.
+Modify <tt>/opt/nginx/conf/nginx.conf</tt> as directed by installation script.
 
 Start on system startup vi Upstart:
 
