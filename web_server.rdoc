@@ -273,3 +273,11 @@ Do a soft reboot of the machine and make sure all services come up as expected:
 2. <tt>telnet [hostname] 25</tt> should refuse connection
 3. all daemons should launch
 
+
+== Remove From Spamhaus PBL
+
+Go here:
+
+http://www.spamhaus.org/lookup.lasso
+
+to de-list your server, if you intend to send email from it.
