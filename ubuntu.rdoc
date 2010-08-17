@@ -55,7 +55,7 @@ Finish...
 Install various commonly-used packages:
 
   sudo apt-get install ubuntu-restricted-extras rar p7zip ntp xchm inkscape \
-    compizconfig-settings-manager transmission hamster-applet xclip
+    compizconfig-settings-manager transmission hamster-applet xclip tofrodos
 
 Install other common software from .deb packages:
 
@@ -80,7 +80,7 @@ The W3C Markup Validator is accessed at http://localhost/w3c-markup-validator
 
 === Apache
 
-  sudo apt-get install apache2-mpm-worker apache2-threaded-dev 
+  sudo apt-get install apache2-mpm-worker apache2-threaded-dev
 
 === Apache mod_xsendfile
 
@@ -141,7 +141,7 @@ The following used to be necessary but don't seem to be anymore:
 
 === PostgreSQL, PostGIS
 
-  sudo apt-get install postgresql-8.3-postgis 
+  sudo apt-get install postgresql-8.3-postgis
 
 === SQLite
 
@@ -155,8 +155,8 @@ Ruby support:
 === Chadwick
 
   cd /usr/local/src
-  sudo wget http://downloads.sourceforge.net/project/chadwick/chadwick-0.5/0.5.2/chadwick-0.5.2.tar.gz 
-  sudo tar xf chadwick-0.5.2.tar.gz 
+  sudo wget http://downloads.sourceforge.net/project/chadwick/chadwick-0.5/0.5.2/chadwick-0.5.2.tar.gz
+  sudo tar xf chadwick-0.5.2.tar.gz
   cd chadwick-0.5.2
   ./configure
   make
@@ -176,7 +176,7 @@ Databases should be dumped to /var/backups/mysql.sql.gz
 === Crontab
 
   sudo crontab -e
-  
+
   # m h  dom mon dow   command
   0 3 * * * /usr/local/sbin/mysql_dump_all
 
@@ -207,11 +207,11 @@ Dump all MySQL databases, then backup directory contents:
     .ssh
     .vimrc
     .vim/*
-    
+
   ~/.gconf/apps/
     gedit-2
     gnome-terminal
-    
+
   ~/.gnome2/
     gedit
     gtksourceview-1.0
