@@ -36,6 +36,13 @@ This will stash your changes, merge in changes from remote, then apply your chan
   git rebase --continue
 
 
+== Find Unmerged Changes
+
+On a topic branch, see what commits have not been merged into master:
+
+  git cherry -v master
+
+
 == Examine a Project Fork
 
 Add the new remote, fetch it, and create a branch to track it:
