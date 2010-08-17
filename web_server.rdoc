@@ -193,10 +193,10 @@ Modify <tt>/opt/nginx/conf/nginx.conf</tt> as directed by installation script.
 Control/start on boot with Upstart:
 
   # create /etc/init/nginx.conf:
-  description     "nginx webserver"
-  start on local-filesystems
-  respawn
+  description "nginx web server"
+  start on (net-device-up and local-filesystems)
   expect fork
+  respawn
   exec /opt/nginx/sbin/nginx
 
 
