@@ -25,3 +25,24 @@ To syntax check current Ruby file:
 
   :!ruby -c %
 
+To cycle through tabs:
+
+  CTRL + pagedown
+  CTRL + pageup
+
+  or:
+
+  gT
+  gt
+
+Split window and open a new file:
+
+  :sp [file]
+
+To switch panes in a split window:
+
+  Ctrl-W [hjkl]
+
+To align equal signs on multiple lines (with Align plugin):
+
+  :5,10Align = 

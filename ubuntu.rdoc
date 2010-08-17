@@ -55,7 +55,7 @@ Finish...
 Install various commonly-used packages:
 
   sudo apt-get install ubuntu-restricted-extras rar p7zip ntp xchm inkscape \
-    compizconfig-settings-manager transmission hamster-applet
+    compizconfig-settings-manager transmission hamster-applet xclip
 
 Install other common software from .deb packages:
 
@@ -73,7 +73,7 @@ Install Firefox plugins:
 
   sudo apt-get install build-essential gedit-plugins meld rpl curl \
     subversion git-core imagemagick libxml2-dev libxslt1-dev \
-    redis-server w3c-markup-validator
+    redis-server w3c-markup-validator librsvg2-bin
   git config --global push.default matching
 
 The W3C Markup Validator is accessed at http://localhost/w3c-markup-validator
@@ -201,6 +201,7 @@ Dump all MySQL databases, then backup directory contents:
     .config/google-chrome/Default
     .gitconfig
     .gtk-bookmarks
+    .gvimrc
     .icons
     .jungledisk
     .ssh
@@ -235,6 +236,8 @@ Dump all MySQL databases, then backup directory contents:
       sbin/*
       share/fonts/*
     share/
+      applications/
+        gvim.desktop
       mime/
         packages/rails.xml    # then: sudo update-mime-database /usr/share/mime
       gtksourceview-2.0/language-specs/
