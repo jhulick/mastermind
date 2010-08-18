@@ -124,7 +124,8 @@ Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
   sudo apt-get install bison libssl-dev libreadline5-dev libreadline6-dev
   rvm install 1.8.7
 
-  gem install rails mysql ruby-debug mongrel autotest-rails capistrano jekyll
+  gem install rails mysql ruby-debug mongrel \
+    autotest-rails capistrano jekyll hirb wirble
 
 The following used to be necessary but don't seem to be anymore:
 
