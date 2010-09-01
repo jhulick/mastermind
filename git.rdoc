@@ -47,13 +47,13 @@ On a topic branch, see what commits have not been merged into master:
 
 Add the new remote, fetch it, and create a branch to track it:
 
-  git remote add dpeckham git://...
-  git fetch dpeckham
-  git branch dpeckham-fork dpeckham/master
+  git remote add walrus git://...
+  git fetch walrus
+  git branch walrus-fork walrus/master
 
 You can now checkout the new branch, explore, and merge into your master:
 
-  git merge dpeckham-fork
+  git merge walrus-fork
 
 
 == Delete a Remote Branch
