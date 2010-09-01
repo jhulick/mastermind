@@ -127,6 +127,10 @@ Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
   gem install rails mysql ruby-debug mongrel \
     autotest-rails capistrano jekyll hirb wirble
 
+You'll also need to install Capistrano:
+
+  sudo apt-get install capistrano
+
 The following used to be necessary but don't seem to be anymore:
 
   sudo apt-get install libmysql-ruby1.8 libmysqlclient15-dev libopenssl-ruby
