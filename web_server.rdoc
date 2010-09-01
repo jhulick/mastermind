@@ -145,6 +145,8 @@ Use UTF-8:
 
 == Ruby
 
+  sudo apt-get install libreadline-ruby1.8
+
   cd /usr/local/src
   sudo wget http://rubyforge.org/frs/download.php/71098/ruby-enterprise_1.8.7-2010.02_amd64_ubuntu10.04.deb
   sudo dpkg -i ruby-enterprise_1.8.7-2010.02_amd64_ubuntu10.04.deb
