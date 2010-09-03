@@ -50,6 +50,11 @@ On a topic branch, see what commits have not been merged into master:
   git cherry -v master
 
 
+== View Un-pushed Commits
+
+  git log origin/master..HEAD
+
+
 == Examine a Project Fork
 
 Add the new remote, fetch it, and create a branch to track it:
