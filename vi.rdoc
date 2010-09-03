@@ -6,7 +6,24 @@ Search and replace on lines 8-10:
 
 Search and replace on all lines:
 
-  :%s/[search]/[replace]/g
+  :g/search/s//replace/g   # long form
+  :%s/search/replace/g     # % = file
+
+Search and replace on all lines that contain the word "hello":
+
+  :g/hello/s/old/new/g
+
+Search and replace on all lines that DON'T contain the word "hello":
+
+  :g!/hello/s/old/new/g
+
+Put HTML italicization codes around the word "really":
+
+  :%s:really:<i>&</i>:g    # you can use : instead of / to delimit pattern
+
+Search and replace with part of what was found (backreference):
+
+  :%s/\(\d+\):/\1 =>/      # works as usual, just need to escape the parens
 
 To set as default editor:
 
@@ -25,6 +42,10 @@ To toggle case of a single character:
 
   ~
 
+To define an auto-expanding abbreviation:
+
+  :ab abbr phrase
+
 To syntax check current Ruby file:
 
   :!ruby -c %
@@ -32,6 +53,10 @@ To syntax check current Ruby file:
 To align equal signs on multiple lines (with Align plugin):
 
   :5,10Align = 
+
+Toggle between the current and previous file:
+
+  Ctrl + ^
 
 
 == GVim
