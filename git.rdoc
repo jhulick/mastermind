@@ -8,6 +8,13 @@ If you do 'git pull' and get the annoying "You asked me to pull without telling 
   git config branch.master.merge refs/heads/master
 
 
+== Commit Partial File Changes
+
+Add with --patch and you'll be prompted to add on a hunk-by-hunk basis:
+
+  git add --patch filename
+
+
 == Tracking Branches
 
 To checkout a local branch that tracks a remote branch:
