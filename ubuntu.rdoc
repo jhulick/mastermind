@@ -144,9 +144,13 @@ The following used to be necessary but don't seem to be anymore:
 
   sudo apt-get install -y php5 php5-gd php5-mysql php-pear
 
-=== PostgreSQL, PostGIS
+=== PostgreSQL
 
-  sudo apt-get install postgresql-8.3-postgis
+  sudo apt-get install postgresql
+
+Ruby support:
+
+  gem install pg
 
 === SQLite
 
