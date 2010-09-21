@@ -31,3 +31,7 @@ Start CouchDB:
 
   sudo launchctl load -w /opt/local/Library/LaunchDaemons/org.apache.couchdb.plist
 
+Start Redis:
+
+  redis-server /opt/local/etc/redis.conf
+
