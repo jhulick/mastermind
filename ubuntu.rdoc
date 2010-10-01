@@ -55,7 +55,7 @@ Finish...
 Install various commonly-used packages:
 
   sudo apt-get install ubuntu-restricted-extras rar p7zip ntp xchm inkscape \
-    compizconfig-settings-manager transmission hamster-applet xclip tofrodos
+    compizconfig-settings-manager transmission hamster-applet xclip tofrodos ack-grep
 
 Install other common software from .deb packages:
 
@@ -170,6 +170,12 @@ Ruby support:
   ./configure
   make
   sudo make install
+
+=== VirtualBox
+
+  sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian lucid non-free"
+  wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+  sudo apt-get update && sudo apt-get install virtualbox-3.2
 
 == Add Configuration Editor to Menu
 
