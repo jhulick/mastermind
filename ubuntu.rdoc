@@ -213,6 +213,7 @@ Dump all MySQL databases, then backup directory contents:
   ~/
     .backgrounds
     .bashrc
+    .bash_credentials
     .config/google-chrome/Default
     .gitconfig
     .gtk-bookmarks
