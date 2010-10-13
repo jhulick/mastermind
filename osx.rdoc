@@ -1,5 +1,7 @@
 = OS X (Leopard)
 
+== Admin
+
 Prevent writing of <tt>.DS_Store</tt> files on network drives:
 
   defaults write com.apple.desktopservices DSDontWriteNetworkStores true
@@ -45,3 +47,9 @@ Start Redis:
 
   redis-server /opt/local/etc/redis.conf
 
+
+== Use
+
+Open the GUI diff viewer from the command line:
+
+  opendiff <file1> <file2>
