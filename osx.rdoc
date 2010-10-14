@@ -38,6 +38,13 @@ Install PostgreSQL:
   # gem
   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
 
+Start the database server using:
+
+    /opt/local/lib/postgresql84/bin/postgres -D /opt/local/var/db/postgresql84/defaultdb
+
+or
+    /opt/local/lib/postgresql84/bin/pg_ctl -D /opt/local/var/db/postgresql84/defaultdb -l logfile start
+
 
 Start CouchDB:
 
