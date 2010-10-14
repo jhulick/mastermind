@@ -121,9 +121,16 @@ See http://rvm.beginrescueend.com/rvm/install for latest install procedure. On M
 
 Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
 
-  sudo apt-get install bison libssl-dev libreadline5-dev libreadline6-dev
+  # install dependencies for Ruby readline module:
+  sudo apt-get install bison libssl-dev libreadline6-dev
+
+  # download and compile Ruby 1.8.7
   rvm install 1.8.7
 
+  # set to default
+  rvm use 1.8.7 --default
+
+  # install some common gems
   gem install rails mysql ruby-debug mongrel \
     autotest-rails capistrano jekyll hirb wirble
 
