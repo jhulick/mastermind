@@ -1,13 +1,30 @@
-= Ubuntu/Gnome (Lucid)
+= Ubuntu/Gnome (Maverick)
 
-Firstly, to move min/max/close buttons back to the right side of the title bar:
+== General GUI Config
 
-* Launch the Configuration Editor (Alt+F2, then type 'gconf-editor').
-* Change the value at app > metacity > general > button_layout to:
+To set up TwinView (dual monitors) install the nvidia drivers and then run the config program:
 
-  menu:minimize,maximize,close
+  gksudo nvidia-settings
 
-Why the heck did they do this?
+Launch the Configuration Editor (Alt+F2, then type 'gconf-editor').
+
+* To move min/max/close buttons back to the right side of the title bar, change the value:
+
+  apps > metacity > general
+
+    button_layout: menu:minimize,maximize,close
+
+* Set some sensible nautilus defaults:
+
+  apps > nautilus > preferences
+
+    confirm_trash: false
+    date_format: iso
+    default folder_viewer: list_view
+
+  apps > nautilus > list_view:
+
+    default_zoom_level: smallest
 
 
 == Update System
@@ -16,14 +33,14 @@ Why the heck did they do this?
   sudo apt-get dist-upgrade
 
 
-== Set up Network
+== Networking
 
   # NFS
-  sudo apt-get install portmap nfs-common
+  sudo apt-get install -y portmap nfs-common
 
   # add to /etc/fstab:
-  192.168.0.100:/media    /mnt/media      nfs rw,hard,intr 0 0
-  192.168.0.100:/private  /mnt/private    nfs rw,hard,intr 0 0
+  192.168.0.100:/media    /mnt/media    nfs defaults 0 0
+  192.168.0.100:/private  /mnt/private  nfs defaults 0 0
 
   # and run:
   sudo mkdir /mnt/media
@@ -31,7 +48,7 @@ Why the heck did they do this?
   sudo mount -a
 
   # SMB
-  sudo apt-get install samba smbfs
+  sudo apt-get install -y samba smbfs
   sudo smbpasswd -a alex
 
 
@@ -54,40 +71,44 @@ Finish...
 
 Install various commonly-used packages:
 
-  sudo apt-get install ubuntu-restricted-extras rar p7zip ntp xchm inkscape \
-    compizconfig-settings-manager transmission hamster-applet xclip tofrodos ack-grep
+  sudo apt-get install -y ubuntu-restricted-extras rar p7zip ntp \
+    compizconfig-settings-manager transmission hamster-applet \
+    xchm inkscape xclip tofrodos ack-grep gedit-plugins vim-gnome
 
 Install other common software from .deb packages:
 
 * Google Chrome: http://www.google.com/chrome?platform=linux
+  * Gmail Checker: https://chrome.google.com/extensions/detail/mihcahmgecmbnbcchbopgniflfhgnkff
+  * Vimium: https://chrome.google.com/extensions/detail/dbepggeogbaibhgnhhndojpepiihcmeb
 * Skype: http://www.skype.com/download/skype/linux
 * JungleDisk: https://jungledisk.com/downloads/personal/desktop/linux
 
 Install Firefox plugins:
 
-* Firebug
-* Web Developer
-* Live HTTP Headers
+* Firebug: http://getfirebug.com/
+* YSlow: http://developer.yahoo.com/yslow/
+* Web Developer: https://addons.mozilla.org/en-US/firefox/addon/60/
+* Live HTTP Headers: https://addons.mozilla.org/en-US/firefox/addon/3829/
 
 === Development Basics
 
-  sudo apt-get install build-essential gedit-plugins meld rpl curl \
+  sudo apt-get install -y build-essential meld rpl curl \
     subversion git-core imagemagick libxml2-dev libxslt1-dev \
     redis-server w3c-markup-validator librsvg2-bin
   git config --global push.default matching
 
-The W3C Markup Validator is accessed at http://localhost/w3c-markup-validator
+The W3C Markup Validator is accessed at: http://localhost/w3c-markup-validator
 
 === Apache
 
-  sudo apt-get install apache2-mpm-worker apache2-threaded-dev
+  sudo apt-get install -y apache2-mpm-worker apache2-threaded-dev
 
 === Apache mod_xsendfile
 
   cd /usr/local/src
-  sudo wget http://tn123.ath.cx/mod_xsendfile/mod_xsendfile-0.9.tar.gz
-  sudo tar -xf mod_xsendfile-0.9.tar.gz
-  cd mod_xsendfile-0.9
+  sudo wget https://tn123.org/mod_xsendfile/mod_xsendfile-0.12.tar.gz
+  sudo tar xf mod_xsendfile-0.12.tar.gz
+  cd mod_xsendfile-0.12
   sudo apxs2 -cia mod_xsendfile.c
 
 As of Lucid, the module seems to be configured automatically, but in case not:
@@ -111,7 +132,15 @@ As of Lucid, the module seems to be configured automatically, but in case not:
   default-character-set = utf8
 
   # restart:
-  sudo /etc/init.d/mysql restart
+  sudo restart mysql
+
+=== PostgreSQL
+
+  sudo apt-get install postgresql
+
+=== SQLite
+
+  sudo apt-get install sqlite3
 
 === Ruby (via Ruby Version Manager)
 
@@ -121,45 +150,27 @@ See http://rvm.beginrescueend.com/rvm/install for latest install procedure. On M
 
 Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
 
-  sudo apt-get install bison libssl-dev libreadline5-dev libreadline6-dev
   rvm install 1.8.7
 
-  gem install rails mysql ruby-debug mongrel \
-    autotest-rails capistrano jekyll hirb wirble
-
-You'll also need to install Capistrano:
-
-  sudo apt-get install capistrano
+  gem install rails mysql2 sqlite3-ruby pg ruby-debug mongrel devise \
+    sinatra RedCloth autotest-rails jekyll hirb wirble
 
 The following used to be necessary but don't seem to be anymore:
 
-  sudo apt-get install libmysql-ruby1.8 libmysqlclient15-dev libopenssl-ruby
+  sudo apt-get install -y bison libssl-dev libreadline5-dev libreadline6-dev
+  sudo apt-get install -y libmysql-ruby1.8 libmysqlclient15-dev libopenssl-ruby
 
 === Passenger
 
   gem install passenger
-  ~/.rvm/gems/ruby-1.8.7-p249/bin/passenger-install-apache2-module
+  sudo apt-get install -y libcurl4-openssl-dev
+  passenger-install-apache2-module
 
 === PHP
 
+Note that this downgrades you to the old Apache prefork MPM.
+
   sudo apt-get install -y php5 php5-gd php5-mysql php-pear
-
-=== PostgreSQL
-
-  sudo apt-get install postgresql
-
-Ruby support:
-
-  gem install pg
-
-=== SQLite
-
-  sudo apt-get install sqlite3
-
-Ruby support:
-
-  sudo apt-get build-dep libsqlite3-ruby1.8
-  gem install sqlite3-ruby
 
 === Chadwick
 
@@ -173,7 +184,7 @@ Ruby support:
 
 === VirtualBox
 
-  sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian lucid non-free"
+  sudo add-apt-repository "deb http://download.virtualbox.org/virtualbox/debian maverick non-free"
   wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
   sudo apt-get update && sudo apt-get install virtualbox-3.2
 
@@ -206,21 +217,27 @@ Dump all MySQL databases, then backup directory contents:
   /usr/local
   /usr/share
   /var/backups
+  [jungledisk configuration]
 
 
 == Restore
 
   ~/
-    .backgrounds
+    .backgrounds/*
     .bashrc
     .bash_credentials
-    .config/google-chrome/Default
+    .fonts/*
+    .gemrc
+    .git/*
     .gitconfig
     .gtk-bookmarks
     .gvimrc
-    .icons
-    .jungledisk
+    .icons/*
+    .irbrc
+    .jungledisk/*
+    .rvmrc
     .ssh
+    .subversion/*
     .vimrc
     .vim/*
 
@@ -231,11 +248,10 @@ Dump all MySQL databases, then backup directory contents:
   ~/.gnome2/
     gedit
     gtksourceview-1.0
-    hamster-applet/hamster.db
     panel2.d/default/launchers/*    # then drag onto panel
 
   ~/.local/share/
-    applications/gvim-tab.desktop   # for opening in new GVim tab
+    hamster-applet/hamster.db
     rhythmbox
 
   /etc/
@@ -250,7 +266,6 @@ Dump all MySQL databases, then backup directory contents:
   /usr/
     local/
       sbin/*
-      share/fonts/*
     share/
       applications/
         gvim.desktop
@@ -260,11 +275,13 @@ Dump all MySQL databases, then backup directory contents:
         erb.lang
         yaml.lang
 
+  [jungledisk]
+
 
 == Old Stuff
 
   # OpenOffice/ODBC
-  sudo apt-get install unixodbc libmyodbc unixodbc-bin
+  sudo apt-get install -y unixodbc libmyodbc unixodbc-bin
   # Configure ODBC connections (from http://www.linux.com/feature/60185):
   sudo ODBCConfig
   # Click the System DSN tab and click the Add button.
