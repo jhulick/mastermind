@@ -150,7 +150,6 @@ See http://rvm.beginrescueend.com/rvm/install for latest install procedure. On M
 
 Then be sure to follow the instructions for modifying <tt>.bashrc</tt>.
 
-<<<<<<< HEAD
   # install dependencies for Ruby readline module:
   sudo apt-get install bison libssl-dev libreadline6-dev
 
