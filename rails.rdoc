@@ -1,20 +1,23 @@
 = Ruby on Rails
 
-=== Missing Net or TimeoutError
+== Create a New Rails Project With a Previous Rails Version
+
+  rails _2.3.5_ NewProject
+
+
+== Missing Net or TimeoutError
 
 If you find yourself having to manually require Net or TimeoutError, make sure you're not skipping ActiveResource in config/environment.rb.
 
 
-
-=== script/runner
+== script/runner
 
 To specify environment for script/runner:
 
   RAILS_ENV=test script/runner blah_blah_blah
 
 
-
-=== HTTP Status Codes
+== HTTP Status Codes
 
 To see HTTP status code names:
 
