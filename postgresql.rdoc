@@ -27,9 +27,9 @@ To set a password for the root ('postgres') user:
   template1=# \q
 
 
-== Fix 'ident' Authentication Error
+== About "ident" Authentication Error
 
-To use password instead of ident auth, edit /etc/postgresql/8.4/main/pg_hba.conf and change the line at the bottom of the file that specifies 'ident':
+"Ident" authentication means you must *be* the (system) user with the same name as the postgres user. There's no password required. If you prefer password authentication instead, edit <tt>/etc/postgresql/8.4/main/pg_hba.conf</tt> and change the line at the bottom of the file that specifies 'ident':
 
   local   all         all                               password
 
