@@ -35,7 +35,7 @@ To use password instead of ident auth, edit /etc/postgresql/8.4/main/pg_hba.conf
 
 and reload the configuration:
 
-  sudo /etc/init.d/postgresql-8.4 reload
+  sudo /etc/init.d/postgresql reload
 
 
 == Dump/restore Databases
