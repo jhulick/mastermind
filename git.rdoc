@@ -43,6 +43,13 @@ This will stash your changes, merge in changes from remote, then apply your chan
   git rebase --continue
 
 
+== View Stashed Changes
+
+Show the most recent entry in the stash as a patch:
+
+  git stash show -p
+
+
 == Find Unmerged Changes
 
 On a topic branch, see what commits have not been merged into master:
