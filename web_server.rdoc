@@ -126,16 +126,19 @@ Restart:
 
   sudo apt-get -y install mysql-server libmysqlclient-dev
 
-Use UTF-8:
+Add to /etc/mysql/my.cnf:
 
-  sudo vi /etc/mysql/my.cnf
-  
-  # add lines in [mysqld] section:
-  character-set-server=utf8
-  default-collation=utf8_unicode_ci
-  # save and exit
-  
-  sudo service mysql restart     # for Lucid
+  # under [client]:
+  default-character-set = utf8
+
+  # under [mysqld]:
+  character-set-server = utf8
+  collation-server = utf8_unicode_ci
+  default-collation = utf8_unicode_ci
+
+And restart the server:
+
+  sudo restart mysql             # for Lucid
   sudo /etc/init.d/mysql restart # for pre-Lucid
 
 === SQLite

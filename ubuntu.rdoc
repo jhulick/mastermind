@@ -123,7 +123,7 @@ As of Lucid, the module seems to be configured automatically, but in case not:
 
 === MySQL
 
-  sudo apt-get install mysql-server
+  sudo apt-get install mysql-server libmysqlclient-dev
 
 Add to /etc/mysql/my.cnf:
 
@@ -137,7 +137,8 @@ Add to /etc/mysql/my.cnf:
 
 And restart the server:
 
-  sudo restart mysql
+  sudo restart mysql             # for Lucid
+  sudo /etc/init.d/mysql restart # for pre-Lucid
 
 === PostgreSQL
 
