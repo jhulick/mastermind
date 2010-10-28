@@ -125,13 +125,18 @@ As of Lucid, the module seems to be configured automatically, but in case not:
 
   sudo apt-get install mysql-server
 
-  # add to [mysqld] section of /etc/mysql/my.cnf:
+Add to /etc/mysql/my.cnf:
+
+  # under [client]:
+  default-character-set = utf8
+
+  # under [mysqld]:
   character-set-server = utf8
   collation-server = utf8_unicode_ci
   default-collation = utf8_unicode_ci
-  default-character-set = utf8
 
-  # restart:
+And restart the server:
+
   sudo restart mysql
 
 === PostgreSQL
