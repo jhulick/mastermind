@@ -40,8 +40,15 @@ and reload the configuration:
 
 == Dump/restore Databases
 
-  pg_dump -U [user] [dbname] > [filename]
-  psql    -U [user] [dbname] < [filename]
+Via Postgres-flavored SQL:
+
+  pg_dump -U +user+ +dbname+ > +filename+
+  psql    -U +user+ +dbname+ < +filename+
+
+Via "custom" zlib-compressed format (allows selective table restore):
+
+  pg_dump -Fc -U +user+ +dbname+ > +filename+
+  pg_restore -d +dbname+ +filename+
 
 
 == Common Tasks
