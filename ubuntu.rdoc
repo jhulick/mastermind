@@ -94,7 +94,7 @@ Install Firefox plugins:
 
   sudo apt-get install -y build-essential meld rpl curl \
     subversion git-core imagemagick libxml2-dev libxslt1-dev \
-    redis-server w3c-markup-validator librsvg2-bin
+    redis-server w3c-markup-validator librsvg2-bin wkhtmltopdf
   git config --global push.default matching
 
 The W3C Markup Validator is accessed at: http://localhost/w3c-markup-validator
