@@ -10,7 +10,7 @@ If you do <tt>git pull</tt> and get the annoying "You asked me to pull without t
 
 == Commit Partial File Changes
 
-Add with <tt>p/--patch</tt> and you'll be prompted to add on a hunk-by-hunk basis:
+Add with <tt>-p</tt> or <tt>--patch</tt> and you'll be prompted to add on a hunk-by-hunk basis:
 
   git add -p filename
 
