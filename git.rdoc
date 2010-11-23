@@ -10,7 +10,7 @@ If you do <tt>git pull</tt> and get the annoying "You asked me to pull without t
 
 == Commit Partial File Changes
 
-Add with <tt>p/--patch</tt>and you'll be prompted to add on a hunk-by-hunk basis:
+Add with <tt>p/--patch</tt> and you'll be prompted to add on a hunk-by-hunk basis:
 
   git add -p filename
 
@@ -31,7 +31,7 @@ The long-hand equivalent:
   git checkout new-branch
 
 
-== Pull, Then Re-Apply Local Changes
+== Rollback, Pull, Then Re-Apply Local Changes
 
 Instead of using plain old git-pull, do:
 
