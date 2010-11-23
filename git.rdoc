@@ -2,7 +2,7 @@
 
 == Merging Trouble
 
-If you do +git pull+ and get the annoying "You asked me to pull without telling me which branch..." message, assuming you're on the +master+ branch pulling from a remote named +origin+:
+If you do <tt>git pull</tt> and get the annoying "You asked me to pull without telling me which branch..." message, assuming you're on the +master+ branch pulling from a remote named +origin+:
 
   git config branch.master.remote origin
   git config branch.master.merge refs/heads/master
@@ -10,7 +10,7 @@ If you do +git pull+ and get the annoying "You asked me to pull without telling 
 
 == Commit Partial File Changes
 
-Add with -p/--patch and you'll be prompted to add on a hunk-by-hunk basis:
+Add with <tt>p/--patch</tt>and you'll be prompted to add on a hunk-by-hunk basis:
 
   git add -p filename
 
