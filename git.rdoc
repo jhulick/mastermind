@@ -64,15 +64,13 @@ On a topic branch, see what commits have not been merged into master:
 
 == Examine a Project Fork
 
-Add the new remote, fetch it, and create a branch to track it:
+Checkout a new branch, based on (your local) master:
 
-  git remote add walrus git://...
-  git fetch walrus
-  git branch walrus-fork walrus/master
+  git checkout -b walrus-master master
 
-You can now checkout the new branch, explore, and merge into your master:
+Pull changes (from their master) into your new branch:
 
-  git merge walrus-fork
+  git pull git://github.com/walrus/project.git master
 
 
 == Delete a Remote Branch
