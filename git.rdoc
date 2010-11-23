@@ -90,7 +90,7 @@ Find the commit that deleted the file:
 
 Once the commit is found, fetch the file from the previous commit:
 
-  git checkout 253b3df~1 ohnoes.rb
+  git checkout 253b3df^ ohnoes.rb
 
 
 == Rewrite History
@@ -99,7 +99,7 @@ Use the following to manipulate git's history of the last 5 commits:
 
   git rebase -i HEAD~5
 
-Display order is oldest to newest top to bottom. Commits really can be reordered, merged, and deleted all at once. 'fixup' is by far the most useful action. Excellent for when you miss a line in your last commit.
+Display order is <b>oldest to newest top to bottom</b>. Commits can be reordered, merged, and deleted all at once. +fixup+ is probably the most useful action.
 
 
 == Tagging a Commit
