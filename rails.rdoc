@@ -19,9 +19,17 @@ To specify environment for script/runner:
 
 == HTTP Status Codes
 
-To see HTTP status code names:
+Status code messages are taken from here:
 
-  /usr/lib/ruby/gems/1.8/gems/actionpack-2.3.2/lib/action_controller/status_codes.rb
+http://www.iana.org/assignments/http-status-codes
+
+In Rails 2.3:
+
+  actionpack-2.3.10/lib/action_controller/status_codes.rb
+
+In Rails 3 (Rack):
+
+  rack-1.2.1/lib/rack/utils.rb
 
 When specifying a status (eg, in head or render method) you can give the number or a symbolized version of the message (lowercased, spaces replaced with underscores).
 
