@@ -1,23 +1,38 @@
-= Ruby on Rails
+= Ruby (and Rails)
 
 == Create a New Rails Project With a Previous Rails Version
 
   rails _2.3.5_ NewProject
 
 
-== Missing Net or TimeoutError
+== Gem Development
+
+Build a gem based on a .gemspec file:
+
+  gem build gemname.gemspec
+
+Install gem locally:
+
+  gem install gemname-1.0.0
+
+Publish to RubyGems.org:
+
+  gem push gemname-1.0.0
+
+
+== Missing Net or TimeoutError on Rails
 
 If you find yourself having to manually require Net or TimeoutError, make sure you're not skipping ActiveResource in config/environment.rb.
 
 
-== script/runner
+== Rails 2 script/runner
 
 To specify environment for script/runner:
 
   RAILS_ENV=test script/runner blah_blah_blah
 
 
-== HTTP Status Codes
+== Rack HTTP Status Codes
 
 Status code messages are taken from here:
 
