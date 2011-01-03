@@ -1,0 +1,12 @@
+= Linux
+
+This file describes the use of various tools commonly found on Linux distributions.
+
+== NS Lookup
+
+To look up the TXT records for a domain:
+
+  nslookup -type=TXT alexreisner.com
+
+Default type is 'A'.
+
