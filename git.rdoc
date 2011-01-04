@@ -116,3 +116,10 @@ Push the tag to remote
 
 Tag creation and pushing should be done atomically.
 
+
+== List Most Frequent Committers
+
+From GitHub's blog (http://github.com/blog/766-jeff-king-peff-is-a-githubber)
+
+  git log --pretty=format:%aN | sort | uniq -c | sort -rn
+
