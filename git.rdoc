@@ -79,7 +79,7 @@ To delete a remote branch:
 
   git push origin :some-branch
 
-Yes, seriously, this will delete some-branch. Make sure to include the colon.
+Yes, seriously, this will delete some-branch. Make sure to include the colon (it's a refspec with no left side).
 
 
 == Restore a Deleted File
