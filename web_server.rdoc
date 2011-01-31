@@ -190,6 +190,8 @@ Create symlink and restart Apache:
 
 Install:
 
+  sudo apt-get install libpcre3-dev
+
   sudo /usr/local/bin/passenger-install-nginx-module
   # the choose install option #1
 
