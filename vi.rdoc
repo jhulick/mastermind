@@ -79,3 +79,11 @@ To cycle through tabs:
   gT
   gt
 
+
+== Typing Special Characters
+
+To insert an umlaut:
+
+  CTRL-K u:
+
+
