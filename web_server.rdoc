@@ -50,7 +50,7 @@ Now on your local machine:
 
   # generate an RSA key:
   ssh-keygen -t rsa -f ~/.ssh/id_rsa
-  
+
   # tell the server about it:
   ssh-copy-id user@server
     <enter password>
@@ -86,13 +86,13 @@ In mods-available/deflate.conf, add <tt>text/css application/x-javascript</tt>:
 
   cd /etc/apache2/mods-available
   sudo sed -i 's/text\/xml/text\/xml text\/css application\/x-javascript application\/javascript/g' deflate.conf
-  
+
 To add a far future 'Expires' header:
 
   cd /etc/apache2/mods-enabled
   sudo ln -s ../mods-available/rewrite.load
   sudo ln -s ../mods-available/expires.load
-  
+
 X-Sendfile module:
 
   cd /usr/local/src
@@ -175,7 +175,7 @@ Install:
 Configure:
 
   sudo vi /etc/apache2/mods-available/passenger.load
-  
+
   # add lines:
   LoadModule passenger_module /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9/ext/apache2/mod_passenger.so
   PassengerRoot /usr/local/lib/ruby/gems/1.8/gems/passenger-2.2.9
@@ -185,7 +185,7 @@ Create symlink and restart Apache:
 
   sudo ln -s /etc/apache2/mods-available/passenger.load /etc/apache2/mods-enabled/passenger.load
   sudo apache2ctl graceful
-  
+
 ==== for Nginx
 
 Install:
@@ -227,7 +227,7 @@ Be sure to <b>configure reverse DNS</b> using the hosting provider's control pan
 Edit master config (<tt>/etc/postfix/master.cf</tt>). Replace first line with:
 
   127.0.0.1:smtp      inet  n       -       n       -       -       smtpd
-  
+
 Edit main config (<tt>/etc/postfix/main.cf</tt>):
 
   sudo postconf -e 'smtpd_reject_unlisted_recipient = no'
@@ -244,11 +244,11 @@ and reload:
 Configure email address to receive notifications (app user):
 
   crontab -e
-  
+
   # add at top:
   MAILTO=alex@alexreisner.com
   PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  
+
 Logrotate (for root user):
 
   sudo crontab -e
