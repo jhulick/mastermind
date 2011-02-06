@@ -190,6 +190,21 @@ Note that this downgrades you to the old Apache prefork MPM.
 
   sudo apt-get install -y php5 php5-gd php5-mysql php-pear
 
+=== MongoDB
+
+Add to /etc/apt/sources.list:
+
+  deb http://downloads.mongodb.org/distros/ubuntu 10.10 10gen
+
+Install 10gen's public GPG key:
+
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+
+Install the latest stable release:
+
+  sudo apt-get install -y mongodb-stable
+
+
 === Chadwick
 
   cd /usr/local/src
