@@ -250,7 +250,6 @@ Dump all MySQL databases, then backup directory contents:
   /usr/local
   /usr/share
   /var/backups
-  [jungledisk configuration]
 
 
 == Restore
@@ -267,7 +266,6 @@ Dump all MySQL databases, then backup directory contents:
     .gvimrc
     .icons/*
     .irbrc
-    .jungledisk/*
     .rvmrc
     .ssh
     .subversion/*
@@ -294,6 +292,7 @@ Dump all MySQL databases, then backup directory contents:
       sites-available
       sites-enabled
     hosts
+    jungledisk/jungledisk-settings.xml
     samba/smb.conf
 
   /usr/
@@ -307,8 +306,6 @@ Dump all MySQL databases, then backup directory contents:
       gtksourceview-2.0/language-specs/
         erb.lang
         yaml.lang
-
-  [jungledisk]
 
 
 == Old Stuff
