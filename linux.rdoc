@@ -10,3 +10,9 @@ To look up the TXT records for a domain:
 
 Default type is 'A'.
 
+== Amazon S3 (s3cmd)
+
+Upload a directory structure (recursively) and make all files publicly readable:
+
+  s3cmd put -P --recursive <files> s3://<bucket>/<path>
+
