@@ -1,0 +1,8 @@
+= Google
+
+== Google Apps Email
+
+=== Offline Email
+
+To enable offline email for users you must enable it under Services > Email and also check "Enable pre-release features" under Domain Settings.
+
