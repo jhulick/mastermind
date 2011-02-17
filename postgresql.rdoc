@@ -23,7 +23,7 @@ At the Postgres prompt:
 To set a password for the root ('postgres') user:
 
   $ sudo su postgres -c psql template1
-  template1=# ALTER USER postgres with PASSWORD 'password';
+  template1=# ALTER USER postgres WITH PASSWORD 'password';
   template1=# \q
 
 
